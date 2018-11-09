@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvDezena"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_small"
+    android:layout_marginStart="@dimen/margin_tiny"
+    android:layout_marginEnd="@dimen/margin_tiny"
+    android:layout_marginTop="@dimen/margin_small"
+    android:background="@drawable/fundo_circular"
+    android:textAlignment="center"
+    android:textColor="@color/branco"
+    android:textSize="@dimen/font_normal"
+    android:text="10"/>

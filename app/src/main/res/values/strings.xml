@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">POCCrawler</string>
+
+    <!--ÚLTIMOS CONCURSOS-->
+    <string name="ultimos_concursos_estimativa">Prêmio estimado para o próximo concurso:</string>
+    <string name="ultimos_concursos_proximo_sorteio">Próximo sorteio: <b>%s</b></string>
+
+    <!--CARTELA-->
+
+</resources>

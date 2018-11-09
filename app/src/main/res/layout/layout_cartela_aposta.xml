@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/margin_normal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDezenas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="8"/>
+
+    <TextView
+        android:id="@+id/tvDezenasSelecionadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_border"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_large"
+        android:visibility="gone"/>
+
+    <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+        android:layout_marginTop="@dimen/margin_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Número de dezenas:"/>
+
+        <Spinner
+            android:id="@+id/spQtdDezenas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_border"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <Button style="@style/BotaoCartela"
+        android:id="@+id/btnCompletarCartela"
+        android:background="@color/verde_mega_sena"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="Completar Cartela"/>
+
+    <Button style="@style/BotaoCartela"
+        android:id="@+id/btnLimparCartela"
+        android:background="@color/verde_mega_sena"
+        android:textAllCaps="false"
+        android:text="Limpar Cartela"/>
+
+</LinearLayout>
