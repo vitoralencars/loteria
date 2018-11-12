@@ -1,15 +1,12 @@
 package com.example.sv0021.poccrawler.presenter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Loteria;
-import com.example.sv0021.poccrawler.util.RecyclerViewClickListener;
 import com.example.sv0021.poccrawler.view.activities.BaseCartelaActivity;
-import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 
 import java.util.List;
 

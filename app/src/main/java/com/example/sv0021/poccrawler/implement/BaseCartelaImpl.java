@@ -1,7 +1,5 @@
 package com.example.sv0021.poccrawler.implement;
 
-import android.content.Context;
-import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;

@@ -1,7 +1,5 @@
 package com.example.sv0021.poccrawler.retrofit;
 
-import android.app.Service;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
