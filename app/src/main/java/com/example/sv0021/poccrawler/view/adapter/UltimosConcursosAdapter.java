@@ -2,6 +2,7 @@ package com.example.sv0021.poccrawler.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +52,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
                 getDataFormatada(loteria.getProximoData()))
         );
 
-        pintarCampos(loteria.getNomeLoteria(), holder, loteria);
+        setCaracteristicasLoteria(holder, loteria);
     }
 
     @Override
@@ -64,32 +65,34 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         return new SimpleDateFormat("dd/MM/yyyy").format(data);
     }
 
-    private void pintarCampos(String nomeLoteria, ViewHolder holder, LoteriaResponse loteria){
-        switch (nomeLoteria){
+    private void setCaracteristicasLoteria(ViewHolder holder, LoteriaResponse loteria){
+        switch (loteria.getNomeLoteria()){
             case "mega-sena":
-                loteria.setCorPadrao(R.color.verde_mega_sena);
+                pintarCampos(holder, loteria.getCorPadrao());
                 loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
             case "quina":
-                loteria.setCorPadrao(R.color.roxo_quina);
+                pintarCampos(holder, loteria.getCorPadrao());
                 loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
             case "lotofacil":
-                loteria.setCorPadrao(R.color.rosa_lotofacil);
+                pintarCampos(holder, loteria.getCorPadrao());
                 loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
             case "lotomania:":
-                loteria.setCorPadrao(R.color.laranja_lotomania);
+                pintarCampos(holder, loteria.getCorPadrao());
                 loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
         }
+    }
 
-        holder.viewTop.setBackgroundColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
-        holder.viewBottom.setBackgroundColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
-        holder.tvNomeLoteria.setTextColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
-        holder.tvDataConcurso.setTextColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
-        holder.tvNumeroConcurso.setTextColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
-        holder.tvGanhadores.setTextColor(ContextCompat.getColor(context, loteria.getCorPadrao()));
+    private void pintarCampos(ViewHolder holder, @ColorRes int corPadrao){
+        holder.viewTop.setBackgroundColor(ContextCompat.getColor(context, corPadrao));
+        holder.viewBottom.setBackgroundColor(ContextCompat.getColor(context, corPadrao));
+        holder.tvNomeLoteria.setTextColor(ContextCompat.getColor(context, corPadrao));
+        holder.tvDataConcurso.setTextColor(ContextCompat.getColor(context, corPadrao));
+        holder.tvNumeroConcurso.setTextColor(ContextCompat.getColor(context, corPadrao));
+        holder.tvGanhadores.setTextColor(ContextCompat.getColor(context, corPadrao));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
