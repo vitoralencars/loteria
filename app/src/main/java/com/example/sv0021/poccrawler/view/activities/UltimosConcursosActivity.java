@@ -42,10 +42,10 @@ public class UltimosConcursosActivity extends BaseActivity {
     }
 
     public void atualizarLoterias(List<LoteriaResponse> loterias){
-        this.loterias = loterias;
-        if(loterias.size() == Constants.NOMES_LOTERIAS.length) {
-            listarUltimosConcursos();
-        }
+        //this.loterias = loterias;
+        //listarUltimosConcursos();
+        adapter = new UltimosConcursosAdapter(this, loterias);
+        rvConcursos.setAdapter(adapter);
     }
 
     public void listarUltimosConcursos(){

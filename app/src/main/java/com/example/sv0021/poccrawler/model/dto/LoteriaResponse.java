@@ -1,7 +1,6 @@
 package com.example.sv0021.poccrawler.model.dto;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,43 +10,28 @@ import java.util.List;
 
 public class LoteriaResponse implements Serializable {
 
-    private String nomeLoteria;
-    private @ColorRes int corPadrao;
     private Drawable icLoteria;
-    @SerializedName("numero")
-    private int numero;
-    @SerializedName("data")
-    private Date data;
-    @SerializedName("sorteio")
-    private List<Integer> sorteio;
-    @SerializedName("ganhadores")
+
+    @SerializedName("CodigoLoteria")
+    private int codigoLoteria;
+    @SerializedName("NomeLoteria")
+    private String nomeLoteria;
+    @SerializedName("CorPadrao")
+    private String corPadrao;
+    @SerializedName("Concurso")
+    private int concurso;
+    @SerializedName("DataSorteio")
+    private Date dataSorteio;
+    @SerializedName("Dezenas")
+    private List<Integer> dezenas;
+    @SerializedName("Ganhadores")
     private List<Integer> ganhadores;
-    @SerializedName("rateio")
+    @SerializedName("Rateio")
     private List<Double> rateio;
-    @SerializedName("acumulado")
-    private String acumulado;
-    @SerializedName("valor_acumulado")
-    private double valorAcumulado;
-    @SerializedName("proximo_estimativa")
-    private double proximoEstimativa;
-    @SerializedName("proximo_data")
-    private Date proximoData;
-
-    public String getNomeLoteria() {
-        return nomeLoteria;
-    }
-
-    public void setNomeLoteria(String nomeLoteria) {
-        this.nomeLoteria = nomeLoteria;
-    }
-
-    public @ColorRes int getCorPadrao() {
-        return corPadrao;
-    }
-
-    public void setCorPadrao(int corPadrao) {
-        this.corPadrao = corPadrao;
-    }
+    @SerializedName("ValorAcumulado")
+    private String valorAcumulado;
+    @SerializedName("EstimativaPremio")
+    private double estimativaPremio;
 
     public Drawable getIcLoteria() {
         return icLoteria;
@@ -57,39 +41,80 @@ public class LoteriaResponse implements Serializable {
         this.icLoteria = icLoteria;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getCodigoLoteria() {
+        return codigoLoteria;
     }
 
-    public Date getData() {
-        return data;
+    public String getNomeLoteria() {
+        return nomeLoteria;
     }
 
-    public List<Integer> getSorteio() {
-        return sorteio;
+    public void setNomeLoteria(String nomeLoteria) {
+        this.nomeLoteria = nomeLoteria;
+    }
+
+    public String getCorPadrao() {
+        return corPadrao;
+    }
+
+    public void setCorPadrao(String corPadrao) {
+        this.corPadrao = corPadrao;
+    }
+
+    public int getConcurso() {
+        return concurso;
+    }
+
+    public void setConcurso(int concurso) {
+        this.concurso = concurso;
+    }
+
+    public Date getDataSorteio() {
+        return dataSorteio;
+    }
+
+    public void setDataSorteio(Date dataSorteio) {
+        this.dataSorteio = dataSorteio;
+    }
+
+    public List<Integer> getDezenas() {
+        return dezenas;
+    }
+
+    public void setDezenas(List<Integer> dezenas) {
+        this.dezenas = dezenas;
     }
 
     public List<Integer> getGanhadores() {
         return ganhadores;
     }
 
+    public void setGanhadores(List<Integer> ganhadores) {
+        this.ganhadores = ganhadores;
+    }
+
     public List<Double> getRateio() {
         return rateio;
     }
 
-    public String getAcumulado() {
-        return acumulado;
+    public void setRateio(List<Double> rateio) {
+        this.rateio = rateio;
     }
 
-    public double getValorAcumulado() {
+    public String getValorAcumulado() {
         return valorAcumulado;
     }
 
-    public double getProximoEstimativa() {
-        return proximoEstimativa;
+    public void setValorAcumulado(String valorAcumulado) {
+        this.valorAcumulado = valorAcumulado;
     }
 
-    public Date getProximoData() {
-        return proximoData;
+    public double getEstimativaPremio() {
+        return estimativaPremio;
     }
+
+    public void setEstimativaPremio(double estimativaPremio) {
+        this.estimativaPremio = estimativaPremio;
+    }
+
 }

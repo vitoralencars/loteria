@@ -22,53 +22,22 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
 
     @Override
     public void onListarUltimosConcursos(UltimosConcursosActivity context, RecyclerView rvConcursos) {
-        List<LoteriaResponse> loterias = new ArrayList<>();
-        for(String nomeLoteria : Constants.NOMES_LOTERIAS){
-            RetrofitBuilder builder = new RetrofitBuilder(Constants.BASE_API_URL);
-            Service service = builder.getService();
-            service.getUserRepositories(nomeLoteria).enqueue(new Callback<LoteriaResponse>() {
-                @Override
-                public void onResponse(Call<LoteriaResponse> call, Response<LoteriaResponse> response) {
-                    if(response.body() != null){
-                        LoteriaResponse loteria = response.body();
-                        setAtributosLoterias(context, loteria, nomeLoteria);
-                        loterias.add(loteria);
-                        context.atualizarLoterias(loterias);
-                    }
+        RetrofitBuilder builder = new RetrofitBuilder(Constants.BASE_API_URL);
+        Service service = builder.getService();
+        service.getUltimosResultados().enqueue(new Callback<List<LoteriaResponse>>() {
+            @Override
+            public void onResponse(Call<List<LoteriaResponse>> call, Response<List<LoteriaResponse>> response) {
+                if(response.body() != null){
+                    List<LoteriaResponse> loterias = response.body();
+                    context.atualizarLoterias(loterias);
                 }
+            }
 
-                @Override
-                public void onFailure(Call<LoteriaResponse> call, Throwable t) {
-
-                }
-            });
-        }
-    }
-
-    private void setAtributosLoterias(UltimosConcursosActivity context,
-                                     LoteriaResponse loteria,
-                                     String nomeLoteria){
-        loteria.setNomeLoteria(nomeLoteria);
-
-        switch (nomeLoteria){
-            case "mega-sena":
-                loteria.setCorPadrao(R.color.verde_mega_sena);
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
-                break;
-            case "quina":
-                loteria.setCorPadrao(R.color.roxo_quina);
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
-                break;
-            case "lotofacil":
-                loteria.setCorPadrao(R.color.rosa_lotofacil);
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
-                break;
-            case "lotomania:":
-                loteria.setCorPadrao(R.color.laranja_lotomania);
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
-                break;
-        }
-
+            @Override
+            public void onFailure(Call<List<LoteriaResponse>> call, Throwable t) {
+                System.out.println(t);
+            }
+        });
     }
 
 }
