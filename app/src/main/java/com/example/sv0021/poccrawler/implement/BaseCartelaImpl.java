@@ -33,7 +33,7 @@ public class BaseCartelaImpl implements BaseCartelaPresenter {
             DezenaCartela dezena = new DezenaCartela();
             dezena.setDezena(i + 1);
             dezena.setSelecionado(false);
-            dezena.setCorBackGround(loteria.getCorPrincipal());
+            //dezena.setCorBackGround(loteria.getCorPrincipal());
             dezenasCartela.add(dezena);
         }
 

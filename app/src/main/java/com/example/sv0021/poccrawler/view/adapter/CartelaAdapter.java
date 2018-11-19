@@ -1,6 +1,7 @@
 package com.example.sv0021.poccrawler.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -60,11 +61,12 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
                     context,
                     R.color.branco
             ));
-            background.setColor(ContextCompat.getColor(
+            /*background.setColor(ContextCompat.getColor(
                     context,
                     R.color.verde_mega_sena
                     //dezena.getCorBackGround()
-            ));
+            ));*/
+            background.setColor(Color.parseColor(dezena.getCorBackground()));
         }else{
             tvDezena.setTextColor(ContextCompat.getColor(
                     context,

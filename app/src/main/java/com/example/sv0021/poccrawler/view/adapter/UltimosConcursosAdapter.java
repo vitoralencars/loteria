@@ -3,9 +3,9 @@ package com.example.sv0021.poccrawler.view.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.util.MoedaUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,15 +45,14 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LoteriaResponse loteria = loterias.get(position);
 
-        holder.ivIconeLoteria.setBackground(loteria.getIcLoteria());
         holder.tvNomeLoteria.setText(loteria.getNomeLoteria());
         holder.tvDataConcurso.setText(getDataFormatada(loteria.getDataSorteio()));
         holder.tvNumeroConcurso.setText(Integer.toString(loteria.getConcurso()));
-        /*holder.tvDataProximoSorteio.setText(context.getResources().getString(
-                R.string.ultimos_concursos_proximo_sorteio,
-                getDataFormatada(loteria.getProximoData()))
-        );*/
+        holder.tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(loteria.getEstimativaPremio()));
+        holder.tvDataProximoSorteio.setText(getDataFormatada(loteria.getProximoSorteio()));
 
+        setInformacoesGanhadores(holder, loteria.getGanhadores().get(0));
+        listarDezenasSorteadas(holder, loteria);
         setCaracteristicasLoteria(holder, loteria);
     }
 
@@ -70,19 +70,19 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         switch (loteria.getCodigoLoteria()){
             case 1:
                 pintarCampos(holder, loteria.getCorPadrao());
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
             case 2:
                 pintarCampos(holder, loteria.getCorPadrao());
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotofacil));
                 break;
             case 3:
                 pintarCampos(holder, loteria.getCorPadrao());
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_quina));
                 break;
             case 4:
                 pintarCampos(holder, loteria.getCorPadrao());
-                loteria.setIcLoteria(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotomania));
                 break;
         }
     }
@@ -95,6 +95,39 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         holder.tvNumeroConcurso.setTextColor(Color.parseColor(corPadrao));
         holder.tvGanhadores.setTextColor(Color.parseColor(corPadrao));
         holder.tvValorEstimado.setTextColor(Color.parseColor(corPadrao));
+    }
+
+    private void setInformacoesGanhadores(ViewHolder holder, int numGanhadores){
+        switch (numGanhadores){
+            case 0:
+                holder.tvGanhadores.setText(context.getResources()
+                        .getString(R.string.ultimos_concursos_acumulou));
+                break;
+            case 1:
+                holder.tvGanhadores.setText(context.getResources()
+                        .getString(R.string.ultimos_concursos_um_ganhador));
+                break;
+            default:
+                holder.tvGanhadores.setText(context.getResources()
+                        .getString(R.string.ultimos_concursos_multiplos_ganhadores,
+                                Integer.toString(numGanhadores)));
+                break;
+        }
+    }
+
+    private void listarDezenasSorteadas(ViewHolder holder, LoteriaResponse loteria){
+
+        DezenasSorteadasAdapter adapter = new DezenasSorteadasAdapter(
+                context,
+                loteria.getCorPadrao(),
+                loteria.getDezenas()
+        );
+
+        holder.rvSorteio.setLayoutManager(loteria.getDezenas().size() > 5
+                ? new GridLayoutManager(context, 6)
+                : new GridLayoutManager(context, loteria.getDezenas().size()));
+
+        holder.rvSorteio.setAdapter(adapter);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

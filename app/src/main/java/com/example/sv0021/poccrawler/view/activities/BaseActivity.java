@@ -5,7 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.sv0021.poccrawler.R;
 
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
@@ -21,6 +24,10 @@ public class BaseActivity extends AppCompatActivity {
 
     public void exibirToast(Context context, String mensagem){
         Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    public ProgressBar getProgressBar(){
+        return findViewById(R.id.progressBar);
     }
 
 }

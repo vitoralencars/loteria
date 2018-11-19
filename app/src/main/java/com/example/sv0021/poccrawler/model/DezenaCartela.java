@@ -8,7 +8,7 @@ public class DezenaCartela implements Serializable {
 
     private int dezena;
     private boolean selecionado;
-    private @ColorRes  int corBackGround;
+    private String corBackground;
 
     public int getDezena() {
         return dezena;
@@ -26,11 +26,11 @@ public class DezenaCartela implements Serializable {
         this.selecionado = selecionado;
     }
 
-    public int getCorBackGround() {
-        return corBackGround;
+    public String getCorBackground() {
+        return corBackground;
     }
 
-    public void setCorBackGround(int corBackGround) {
-        this.corBackGround = corBackGround;
+    public void setCorBackground(String corBackGround) {
+        this.corBackground = corBackGround;
     }
 }

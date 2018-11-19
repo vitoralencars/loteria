@@ -10,8 +10,6 @@ import java.util.List;
 
 public class LoteriaResponse implements Serializable {
 
-    private Drawable icLoteria;
-
     @SerializedName("CodigoLoteria")
     private int codigoLoteria;
     @SerializedName("NomeLoteria")
@@ -29,17 +27,11 @@ public class LoteriaResponse implements Serializable {
     @SerializedName("Rateio")
     private List<Double> rateio;
     @SerializedName("ValorAcumulado")
-    private String valorAcumulado;
+    private double valorAcumulado;
     @SerializedName("EstimativaPremio")
     private double estimativaPremio;
-
-    public Drawable getIcLoteria() {
-        return icLoteria;
-    }
-
-    public void setIcLoteria(Drawable icLoteria) {
-        this.icLoteria = icLoteria;
-    }
+    @SerializedName("ProximoSorteio")
+    private Date proximoSorteio;
 
     public int getCodigoLoteria() {
         return codigoLoteria;
@@ -49,72 +41,40 @@ public class LoteriaResponse implements Serializable {
         return nomeLoteria;
     }
 
-    public void setNomeLoteria(String nomeLoteria) {
-        this.nomeLoteria = nomeLoteria;
-    }
-
     public String getCorPadrao() {
         return corPadrao;
-    }
-
-    public void setCorPadrao(String corPadrao) {
-        this.corPadrao = corPadrao;
     }
 
     public int getConcurso() {
         return concurso;
     }
 
-    public void setConcurso(int concurso) {
-        this.concurso = concurso;
-    }
-
     public Date getDataSorteio() {
         return dataSorteio;
-    }
-
-    public void setDataSorteio(Date dataSorteio) {
-        this.dataSorteio = dataSorteio;
     }
 
     public List<Integer> getDezenas() {
         return dezenas;
     }
 
-    public void setDezenas(List<Integer> dezenas) {
-        this.dezenas = dezenas;
-    }
-
     public List<Integer> getGanhadores() {
         return ganhadores;
-    }
-
-    public void setGanhadores(List<Integer> ganhadores) {
-        this.ganhadores = ganhadores;
     }
 
     public List<Double> getRateio() {
         return rateio;
     }
 
-    public void setRateio(List<Double> rateio) {
-        this.rateio = rateio;
-    }
-
-    public String getValorAcumulado() {
+    public double getValorAcumulado() {
         return valorAcumulado;
-    }
-
-    public void setValorAcumulado(String valorAcumulado) {
-        this.valorAcumulado = valorAcumulado;
     }
 
     public double getEstimativaPremio() {
         return estimativaPremio;
     }
 
-    public void setEstimativaPremio(double estimativaPremio) {
-        this.estimativaPremio = estimativaPremio;
+    public Date getProximoSorteio() {
+        return proximoSorteio;
     }
 
 }

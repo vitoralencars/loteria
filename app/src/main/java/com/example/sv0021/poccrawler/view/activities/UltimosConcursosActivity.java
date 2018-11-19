@@ -6,19 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.UltimosConcursosImpl;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
-import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.adapter.UltimosConcursosAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UltimosConcursosActivity extends BaseActivity {
 
     private UltimosConcursosImpl impl = new UltimosConcursosImpl();
-
-    private UltimosConcursosAdapter adapter;
-    private List<LoteriaResponse> loterias = new ArrayList<>();
-
     private RecyclerView rvConcursos;
 
     @Override
@@ -37,19 +31,8 @@ public class UltimosConcursosActivity extends BaseActivity {
         impl.onListarUltimosConcursos(UltimosConcursosActivity.this, rvConcursos);
     }
 
-    public UltimosConcursosAdapter getAdapter(){
-        return adapter;
-    }
-
     public void atualizarLoterias(List<LoteriaResponse> loterias){
-        //this.loterias = loterias;
-        //listarUltimosConcursos();
-        adapter = new UltimosConcursosAdapter(this, loterias);
-        rvConcursos.setAdapter(adapter);
-    }
-
-    public void listarUltimosConcursos(){
-        adapter = new UltimosConcursosAdapter(this, loterias);
+        UltimosConcursosAdapter adapter = new UltimosConcursosAdapter(this, loterias);
         rvConcursos.setAdapter(adapter);
     }
 

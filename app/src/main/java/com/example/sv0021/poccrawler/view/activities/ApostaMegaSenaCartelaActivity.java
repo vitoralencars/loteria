@@ -23,7 +23,6 @@ public class ApostaMegaSenaCartelaActivity extends BaseCartelaActivity{
         loteria.setQtdMinimaDezenasSelecionadas(Constants.QTD_MINIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
         loteria.setQtdMaximaDezenasSelecionadas(Constants.QTD_MAXIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
         loteria.setQtdDezenasCartela(Constants.QTD_DEZENAS_MEGA_SENA);
-        loteria.setCorPrincipal(ContextCompat.getColor(this, R.color.verde_mega_sena));
 
         return loteria;
     }

@@ -3,7 +3,10 @@
 
     <!--ÚLTIMOS CONCURSOS-->
     <string name="ultimos_concursos_estimativa">Prêmio estimado para o próximo concurso:</string>
-    <string name="ultimos_concursos_proximo_sorteio">Próximo sorteio: <b>%s</b></string>
+    <string name="ultimos_concursos_proximo_sorteio">Próximo sorteio:</string>
+    <string name="ultimos_concursos_acumulou">Acumulou!</string>
+    <string name="ultimos_concursos_um_ganhador">1 ganhador!</string>
+    <string name="ultimos_concursos_multiplos_ganhadores">%s ganhadores!</string>
 
     <!--CARTELA-->
 
