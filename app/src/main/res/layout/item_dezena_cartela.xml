@@ -8,7 +8,7 @@
     android:layout_marginStart="@dimen/margin_tiny"
     android:layout_marginEnd="@dimen/margin_tiny"
     android:layout_marginTop="@dimen/margin_small"
-    android:background="@drawable/fundo_circular"
+    android:background="@drawable/fundo_circular_preenchido"
     android:textAlignment="center"
     android:textColor="@color/branco"
     android:textSize="@dimen/font_normal"

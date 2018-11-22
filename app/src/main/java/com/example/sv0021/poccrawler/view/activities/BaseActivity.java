@@ -2,6 +2,7 @@ package com.example.sv0021.poccrawler.view.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,14 @@ public class BaseActivity extends AppCompatActivity {
 
     public ProgressBar getProgressBar(){
         return findViewById(R.id.progressBar);
+    }
+
+    public void loadActivity(Intent intent){
+        startActivity(intent);
+    }
+
+    public void loadActivity(Class destino){
+        startActivity(new Intent(this, destino));
     }
 
 }

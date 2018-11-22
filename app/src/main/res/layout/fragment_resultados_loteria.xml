@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cinza_claro">
+
+    <LinearLayout style="@style/SimpleLinearLayoutVertical"
+        android:padding="@dimen/padding_normal">
+
+        <LinearLayout style="@style/SimpleLinearLayoutVertical"
+            android:background="@color/branco"
+            android:elevation="3dp">
+
+            <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+                android:padding="@dimen/padding_small">
+
+                <ImageView
+                    android:id="@+id/ivIconeLoteria"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tvNomeLoteria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_border"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/font_large"
+                    android:text="Mega-Sena"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewTraco"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+
+            <LinearLayout style="@style/SimpleLinearLayoutVertical"
+                android:padding="@dimen/padding_small"
+                android:layout_marginTop="@dimen/margin_border">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivAnterior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/padding_tiny"
+                        android:background="@drawable/fundo_circular_borda"
+                        app:srcCompat="@drawable/ic_seta_esquerda"/>
+
+                    <TextView
+                        android:id="@+id/tvConcurso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/preto"
+                        android:text="Concurso 2098"/>
+
+                    <ImageView
+                        android:id="@+id/ivProximo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/padding_tiny"
+                        android:background="@drawable/fundo_circular_borda"
+                        app:srcCompat="@drawable/ic_seta_direita"/>
+
+                </RelativeLayout>
+
+                <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/margin_border"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/preto"
+                        android:text="@string/ultimos_concursos_proximo_sorteio"/>
+
+                    <TextView
+                        android:id="@+id/tvDataProximoSorteio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:textColor="@color/preto"
+                        android:textStyle="bold"
+                        android:text="20/11/2018"/>
+
+                </LinearLayout>
+
+
+                <TextView style="@style/TextoCentralizado"
+                    android:text="@string/ultimos_concursos_premio_maximo"
+                    android:textSize="@dimen/font_small"
+                    android:textColor="@color/preto"
+                    android:layout_marginTop="@dimen/margin_border"/>
+
+                <TextView style="@style/TextoCentralizado"
+                    android:id="@+id/tvGanhadores"
+                    android:text="Acumulou!"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvDezenas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="@dimen/margin_border"/>
+
+                <LinearLayout style="@style/SimpleLinearLayoutVertical"
+                    android:id="@+id/llValorEstimado">
+
+                    <TextView style="@style/TextoCentralizado"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:textColor="@color/preto"
+                        android:text="@string/ultimos_concursos_estimativa"/>
+
+                    <TextView style="@style/TextoCentralizado"
+                        android:id="@+id/tvValorEstimado"
+                        android:textSize="@dimen/font_large"
+                        android:textStyle="bold"
+                        android:text="R$ 30.000.000,00"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/SimpleLinearLayoutVertical"
+            android:padding="@dimen/padding_normal"
+            android:layout_marginTop="@dimen/margin_border"
+            android:background="@color/branco">
+
+            <TextView
+                android:id="@+id/tvResultadoDetalhado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_large"
+                android:textColor="@color/preto"
+                android:text="Resultado Detalhado"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cinza_claro"
+                android:layout_marginTop="@dimen/padding_normal"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvResultados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

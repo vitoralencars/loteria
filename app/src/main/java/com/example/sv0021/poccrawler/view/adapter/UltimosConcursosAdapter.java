@@ -16,19 +16,23 @@ import android.widget.TextView;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
+import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
+import com.example.sv0021.poccrawler.view.activities.UltimosConcursosActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import static com.example.sv0021.poccrawler.util.DataUtils.getDataFormatada;
 
 public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcursosAdapter.ViewHolder>{
 
-    private Context context;
+    private UltimosConcursosActivity context;
     private List<LoteriaResponse> loterias;
+    private ItemClickListener itemClickListener;
 
-    public UltimosConcursosAdapter(Context context, List<LoteriaResponse> loterias) {
+    public UltimosConcursosAdapter(UltimosConcursosActivity context, List<LoteriaResponse> loterias) {
         this.context = context;
         this.loterias = loterias;
+        this.itemClickListener = context;
     }
 
     @NonNull
@@ -59,11 +63,6 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
     @Override
     public int getItemCount() {
         return loterias.size();
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private String getDataFormatada(Date data){
-        return new SimpleDateFormat("dd/MM/yyyy").format(data);
     }
 
     private void setCaracteristicasLoteria(ViewHolder holder, LoteriaResponse loteria){
@@ -130,7 +129,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         holder.rvSorteio.setAdapter(adapter);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         View viewTop, viewBottom;
         ImageView ivIconeLoteria;
@@ -151,6 +150,13 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
             tvValorEstimado = view.findViewById(R.id.tvValorEstimado);
             tvDataProximoSorteio = view.findViewById(R.id.tvDataProximoSorteio);
             rvSorteio = view.findViewById(R.id.rvSorteio);
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onItemClick(getAdapterPosition());
         }
     }
 }

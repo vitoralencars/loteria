@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/SimpleLinearLayoutVertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:padding="@dimen/padding_normal"
+    android:background="@color/branco">
+
+    <TextView
+        android:id="@+id/tvDezenas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_large"
+        android:text="6 dezenas"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cinza_claro"
+        android:layout_marginTop="@dimen/margin_border"/>
+
+    <LinearLayout style="@style/SimpleLinearLayoutVertical"
+        android:padding="@dimen/padding_small">
+
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total de ganhadores:"/>
+
+            <TextView
+                android:id="@+id/tvQtdGanhadores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rateio:"/>
+
+            <TextView
+                android:id="@+id/tvValorRateio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="R$ 25.000.000,00"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Valor total:"/>
+
+            <TextView
+                android:id="@+id/tvValorTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="R$ 50.000.000,00"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cinza_claro"/>
+
+</LinearLayout>

@@ -19,10 +19,10 @@ public class ApostaMegaSenaCartelaActivity extends BaseCartelaActivity{
 
     private Loteria getLoteria(){
         Loteria loteria = new Loteria();
-        loteria.setQtdDesejadaDezenasSelecionadas(Constants.QTD_MINIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
+        /*loteria.setQtdDesejadaDezenasSelecionadas(Constants.QTD_MINIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
         loteria.setQtdMinimaDezenasSelecionadas(Constants.QTD_MINIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
         loteria.setQtdMaximaDezenasSelecionadas(Constants.QTD_MAXIMA_DEZENAS_SELECIONADAS_MEGA_SENA);
-        loteria.setQtdDezenasCartela(Constants.QTD_DEZENAS_MEGA_SENA);
+        loteria.setQtdDezenasCartela(Constants.QTD_DEZENAS_MEGA_SENA);*/
 
         return loteria;
     }

@@ -14,13 +14,13 @@ import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.BaseCartelaImpl;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Loteria;
-import com.example.sv0021.poccrawler.util.RecyclerViewClickListener;
+import com.example.sv0021.poccrawler.util.recyclerview.DezenaClickListener;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 
 import java.util.List;
 
 @SuppressLint("Registered")
-public class BaseCartelaActivity extends BaseActivity implements RecyclerViewClickListener {
+public class BaseCartelaActivity extends BaseActivity implements DezenaClickListener {
 
     private BaseCartelaImpl baseCartelaImpl = new BaseCartelaImpl();
 

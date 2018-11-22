@@ -77,19 +77,13 @@
         <LinearLayout style="@style/SimpleLinearLayoutVertical"
             android:padding="@dimen/padding_normal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
+            <TextView style="@style/TextoCentralizado"
                 android:textSize="@dimen/font_small"
                 android:textColor="@color/preto"
-                android:text="Prêmio máximo:"/>
+                android:text="@string/ultimos_concursos_premio_maximo"/>
 
-            <TextView
+            <TextView style="@style/TextoCentralizado"
                 android:id="@+id/tvGanhadores"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:textSize="@dimen/font_huge"
                 android:textStyle="bold"
                 android:text="Acumulou!"/>
@@ -102,19 +96,13 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_border"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <TextView style="@style/TextoCentralizado"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:textAlignment="center"
                 android:textColor="@color/preto"
                 android:text="@string/ultimos_concursos_estimativa"/>
 
-            <TextView
+            <TextView style="@style/TextoCentralizado"
                 android:id="@+id/tvValorEstimado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:textSize="@dimen/font_huge"
                 android:textStyle="bold"
                 android:text="R$ 30.000.000,00"/>

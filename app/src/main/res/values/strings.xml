@@ -2,11 +2,17 @@
     <string name="app_name">POCCrawler</string>
 
     <!--ÚLTIMOS CONCURSOS-->
+    <string name="ultimos_concursos_premio_maximo">Prêmio máximo:</string>
     <string name="ultimos_concursos_estimativa">Prêmio estimado para o próximo concurso:</string>
     <string name="ultimos_concursos_proximo_sorteio">Próximo sorteio:</string>
     <string name="ultimos_concursos_acumulou">Acumulou!</string>
     <string name="ultimos_concursos_um_ganhador">1 ganhador!</string>
     <string name="ultimos_concursos_multiplos_ganhadores">%s ganhadores!</string>
+
+    <!--SORTEIO DETALHADO-->
+    <string name="detalhe_sorteio_qtd_ganhadores">Total de ganhadores:</string>
+    <string name="detalhe_sorteio_valor_rateio">Rateio:</string>
+    <string name="detalhe_sorteio_valor_total">Valor total:</string>
 
     <!--CARTELA-->
 
