@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.MainActivity" />
-        <activity android:name=".view.activities.ApostaMegaSenaCartelaActivity"></activity>
-        <activity android:name=".view.activities.UltimosConcursosActivity">
+        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.ApostaMegaSenaCartelaActivity"></activity>
+        <activity android:name=".view.activity.UltimosConcursosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.LoteriaActivity"></activity>
+        <activity android:name=".view.activity.LoteriaActivity"></activity>
     </application>
 
 </manifest>

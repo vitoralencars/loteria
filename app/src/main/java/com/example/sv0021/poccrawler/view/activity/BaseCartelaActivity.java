@@ -1,4 +1,4 @@
-package com.example.sv0021.poccrawler.view.activities;
+package com.example.sv0021.poccrawler.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
@@ -11,18 +11,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
-import com.example.sv0021.poccrawler.implement.BaseCartelaImpl;
+import com.example.sv0021.poccrawler.implement.CartelaImpl;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
-import com.example.sv0021.poccrawler.model.Loteria;
+import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.util.recyclerview.DezenaClickListener;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 
 import java.util.List;
 
 @SuppressLint("Registered")
-public class BaseCartelaActivity extends BaseActivity implements DezenaClickListener {
+public class BaseCartelaActivity extends BaseActivity {
 
-    private BaseCartelaImpl baseCartelaImpl = new BaseCartelaImpl();
+    private CartelaImpl cartelaImpl = new CartelaImpl();
 
     private TextView tvDezenasSelecionadas;
     private RecyclerView rvDezenas;
@@ -30,7 +30,7 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
     private Button btnCompletar, btnLimpar;
     private CartelaAdapter adapter;
 
-    private Loteria loteria;
+    private Cartela cartela;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    public void setLayout(int idLayout){
+    /*public void setLayout(int idLayout){
         setContentView(idLayout);
         initView();
         initEvents();
@@ -53,9 +53,9 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
     }
 
     private void initEvents(){
-        btnCompletar.setOnClickListener(view -> baseCartelaImpl.onCompletarCartela(
+        btnCompletar.setOnClickListener(view -> cartelaImpl.onCompletarCartela(
                 this,
-                loteria
+                cartela
         ));
 
         btnLimpar.setOnClickListener(view -> limparCartela());
@@ -63,10 +63,10 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
         spQtdDezenas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                baseCartelaImpl.onSpinnerSelectionListener(
+                cartelaImpl.onSpinnerSelectionListener(
                         BaseCartelaActivity.this,
                         position,
-                        loteria
+                        cartela
                 );
             }
 
@@ -77,36 +77,36 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
         });
     }
 
-    public void setLoteria(Loteria loteria){
-        this.loteria = loteria;
+    public void setCartela(Cartela cartela){
+        this.cartela = cartela;
         initSpinner();
     }
 
     private void initSpinner(){
-        baseCartelaImpl.onInitSpinnerQtdDezenas(
+        cartelaImpl.onInitSpinnerQtdDezenas(
                 this,
                 spQtdDezenas,
-                loteria
+                cartela
         );
     }
 
     public void montarCartela(){
-        baseCartelaImpl.onMontarCartela(
+        cartelaImpl.onMontarCartela(
                 this,
-                loteria,
+                cartela,
                 rvDezenas
         );
     }
 
     public void limparCartela(){
-        baseCartelaImpl.onLimparCartela(
+        cartelaImpl.onLimparCartela(
                 this,
-                loteria
+                cartela
         );
     }
 
     public void atualizarTextoDezenasSelecionadas(List<DezenaCartela> dezenasSelecionados){
-        baseCartelaImpl.onExibirDezenasSelecionadas(tvDezenasSelecionadas, dezenasSelecionados);
+        cartelaImpl.onExibirDezenasSelecionadas(tvDezenasSelecionadas, dezenasSelecionados);
     }
 
     public void setAdapter(CartelaAdapter adapter){
@@ -119,11 +119,11 @@ public class BaseCartelaActivity extends BaseActivity implements DezenaClickList
 
     @Override
     public void onItemClick(int position, TextView tvDezena) {
-        baseCartelaImpl.onDezenaClick(
+        cartelaImpl.onDezenaClick(
                 this,
                 position,
                 tvDezena,
-                loteria
+                cartela
         );
-    }
+    }*/
 }

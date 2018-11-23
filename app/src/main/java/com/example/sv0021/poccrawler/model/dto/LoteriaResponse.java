@@ -1,7 +1,5 @@
 package com.example.sv0021.poccrawler.model.dto;
 
-import android.graphics.drawable.Drawable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -16,6 +14,12 @@ public class LoteriaResponse implements Serializable {
     private String nomeLoteria;
     @SerializedName("CorPadrao")
     private String corPadrao;
+    @SerializedName("QtdMinimaDezenasAposta")
+    private int qtdMinimaDezenasAposta;
+    @SerializedName("QtdMaximaDezenasAposta")
+    private int qtdMaximaDezenasAposta;
+    @SerializedName("QtdDezenasTotal")
+    private int qtdDezenasTotal;
     @SerializedName("Concurso")
     private int concurso;
     @SerializedName("DataSorteio")
@@ -43,6 +47,18 @@ public class LoteriaResponse implements Serializable {
 
     public String getCorPadrao() {
         return corPadrao;
+    }
+
+    public int getQtdMinimaDezenasAposta() {
+        return qtdMinimaDezenasAposta;
+    }
+
+    public int getQtdMaximaDezenasAposta() {
+        return qtdMaximaDezenasAposta;
+    }
+
+    public int getQtdDezenasTotal() {
+        return qtdDezenasTotal;
     }
 
     public int getConcurso() {

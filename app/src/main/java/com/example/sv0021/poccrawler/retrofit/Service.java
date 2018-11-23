@@ -13,4 +13,7 @@ public interface Service {
     @GET("ultimosresultados")
     Call<List<LoteriaResponse>> getUltimosResultados();
 
+    @GET("loteria/{idloteria}/{concurso}")
+    Call<LoteriaResponse> getResultadoConcurso(@Path("idloteria")int idLoteria, @Path("concurso")int concurso);
+
 }

@@ -6,9 +6,8 @@ import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.presenter.UltimosConcursosPresenter;
 import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
 import com.example.sv0021.poccrawler.retrofit.Service;
-import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.util.ProgressBarControl;
-import com.example.sv0021.poccrawler.view.activities.UltimosConcursosActivity;
+import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
 
 import java.util.List;
 
@@ -21,8 +20,7 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
     @Override
     public void onListarUltimosConcursos(UltimosConcursosActivity context, RecyclerView rvConcursos) {
         ProgressBarControl.mostrarProgressBar(context);
-        RetrofitBuilder builder = new RetrofitBuilder(Constants.BASE_API_URL);
-        Service service = builder.getService();
+        Service service = new RetrofitBuilder().getService();
         service.getUltimosResultados().enqueue(new Callback<List<LoteriaResponse>>() {
             @Override
             public void onResponse(Call<List<LoteriaResponse>> call, Response<List<LoteriaResponse>> response) {

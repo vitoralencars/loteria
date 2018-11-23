@@ -1,18 +1,16 @@
 package com.example.sv0021.poccrawler.model;
 
-import android.support.annotation.ColorRes;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loteria {
+public class Cartela {
 
     private int qtdDezenasCartela, qtdMinimaDezenasSelecionadas, qtdMaximaDezenasSelecionadas,
             qtdDesejadaDezenasSelecionadas;
     private int[] dezenasDisponiveis;
-    private @ColorRes int corPrincipal;
     private List<DezenaCartela> dezenasCartela = new ArrayList<>();
     private List<DezenaCartela> dezenasSelecionadas = new ArrayList<>();
+    private String corPadrao;
 
     public int getQtdDezenasCartela() {
         return qtdDezenasCartela;
@@ -46,14 +44,6 @@ public class Loteria {
         this.qtdDesejadaDezenasSelecionadas = qtdDesejadaDezenasSelecionadas;
     }
 
-    public int getCorPrincipal() {
-        return corPrincipal;
-    }
-
-    public void setCorPrincipal(int corPrincipal) {
-        this.corPrincipal = corPrincipal;
-    }
-
     public int[] getDezenasDisponiveis() {
         return dezenasDisponiveis;
     }
@@ -76,5 +66,13 @@ public class Loteria {
 
     public void setDezenasSelecionadas(List<DezenaCartela> dezenasSelecionadas) {
         this.dezenasSelecionadas = dezenasSelecionadas;
+    }
+
+    public String getCorPadrao() {
+        return corPadrao;
+    }
+
+    public void setCorPadrao(String corPadrao) {
+        this.corPadrao = corPadrao;
     }
 }

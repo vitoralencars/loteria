@@ -5,4 +5,6 @@
 
     <include layout="@layout/content_loteria"/>
 
+    <include layout="@layout/progress_bar_padrao"/>
+
 </RelativeLayout>

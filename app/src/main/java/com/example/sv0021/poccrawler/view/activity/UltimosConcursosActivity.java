@@ -1,4 +1,4 @@
-package com.example.sv0021.poccrawler.view.activities;
+package com.example.sv0021.poccrawler.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

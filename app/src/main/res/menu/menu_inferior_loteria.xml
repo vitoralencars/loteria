@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_concurso"
+        android:title="Concurso"
+        android:icon="@drawable/ic_seta_esquerda" />
+
+    <item
+        android:id="@+id/menu_cartela"
+        android:title="Cartela"
+        android:icon="@mipmap/ic_launcher_round"/>
+
+    <!--<item
+        android:id="@+id/menu_inf_perfil"
+        android:title="Perfil"
+        android:icon="@drawable/ic_perfil_24dp"/>-->
+
+</menu>

@@ -2,13 +2,13 @@
 <LinearLayout style="@style/SimpleLinearLayoutVertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginTop="@dimen/margin_normal"
-    android:padding="@dimen/padding_normal"
     android:background="@color/branco">
 
     <TextView
-        android:id="@+id/tvDezenas"
+        android:id="@+id/tvQtdDezenas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_border"
         android:textStyle="bold"
         android:textSize="@dimen/font_large"
         android:text="6 dezenas"/>
@@ -22,7 +22,9 @@
     <LinearLayout style="@style/SimpleLinearLayoutVertical"
         android:padding="@dimen/padding_small">
 
-        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal">
 
             <TextView
                 android:layout_width="match_parent"
@@ -34,12 +36,18 @@
                 android:id="@+id/tvQtdGanhadores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
+                android:layout_gravity="bottom"
+                android:textStyle="bold"
+                android:textColor="@color/preto"
                 android:text="2"/>
 
         </LinearLayout>
 
-        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+            android:id="@+id/llRateio"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal">
 
             <TextView
                 android:layout_width="match_parent"
@@ -51,12 +59,17 @@
                 android:id="@+id/tvValorRateio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
+                android:textStyle="bold"
+                android:textColor="@color/preto"
                 android:text="R$ 25.000.000,00"/>
 
         </LinearLayout>
 
-        <LinearLayout style="@style/SimpleLinearLayoutHorizontal">
+        <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+            android:id="@+id/llTotal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal">
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,7 +81,9 @@
                 android:id="@+id/tvValorTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
+                android:textStyle="bold"
+                android:textColor="@color/preto"
                 android:text="R$ 50.000.000,00"/>
 
         </LinearLayout>

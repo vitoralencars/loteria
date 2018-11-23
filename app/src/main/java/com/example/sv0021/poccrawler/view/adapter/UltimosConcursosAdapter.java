@@ -17,7 +17,7 @@ import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
-import com.example.sv0021.poccrawler.view.activities.UltimosConcursosActivity;
+import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
 
 import java.util.List;
 

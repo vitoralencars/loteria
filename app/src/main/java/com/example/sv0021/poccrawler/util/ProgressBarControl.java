@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.example.sv0021.poccrawler.view.activities.BaseActivity;
+import com.example.sv0021.poccrawler.view.activity.BaseActivity;
 
 public class ProgressBarControl {
 

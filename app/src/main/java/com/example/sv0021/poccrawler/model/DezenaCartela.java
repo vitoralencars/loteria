@@ -1,7 +1,5 @@
 package com.example.sv0021.poccrawler.model;
 
-import android.support.annotation.ColorRes;
-
 import java.io.Serializable;
 
 public class DezenaCartela implements Serializable {

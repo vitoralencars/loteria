@@ -1,5 +1,6 @@
 package com.example.sv0021.poccrawler.retrofit;
 
+import com.example.sv0021.poccrawler.util.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,8 +12,8 @@ public class RetrofitBuilder {
     private Retrofit retrofit;
     private Service service;
 
-    public RetrofitBuilder(String baseURL){
-        retrofit = initRetrofit(baseURL);
+    public RetrofitBuilder(){
+        retrofit = initRetrofit(Constants.BASE_API_URL);
         service = initService(retrofit);
     }
 

@@ -13,17 +13,19 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
-import com.example.sv0021.poccrawler.view.activities.BaseCartelaActivity;
+import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
 import java.util.List;
 
 public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHolder>{
 
-    private BaseCartelaActivity context;
+    private Context context;
+    private CartelaFragment fragment;
     private List<DezenaCartela> dezenas;
 
-    public CartelaAdapter(BaseCartelaActivity context, List<DezenaCartela> dezenas){
+    public CartelaAdapter(Context context, CartelaFragment fragment, List<DezenaCartela> dezenas){
         this.context = context;
+        this.fragment = fragment;
         this.dezenas = dezenas;
     }
 
@@ -61,11 +63,6 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
                     context,
                     R.color.branco
             ));
-            /*background.setColor(ContextCompat.getColor(
-                    context,
-                    R.color.verde_mega_sena
-                    //dezena.getCorBackGround()
-            ));*/
             background.setColor(Color.parseColor(dezena.getCorBackground()));
         }else{
             tvDezena.setTextColor(ContextCompat.getColor(
@@ -88,7 +85,7 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
 
             tvDezena = itemView.findViewById(R.id.tvDezena);
 
-            itemView.setOnClickListener(view -> context.onItemClick(
+            itemView.setOnClickListener(view -> fragment.onItemClick(
                     getAdapterPosition(), tvDezena));
         }
     }

@@ -7,23 +7,37 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
+import com.example.sv0021.poccrawler.model.ResultadoLoteria;
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.presenter.ResultadosLoteriaPresenter;
+import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
+import com.example.sv0021.poccrawler.retrofit.Service;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
-import com.example.sv0021.poccrawler.view.activities.LoteriaActivity;
+import com.example.sv0021.poccrawler.util.ProgressBarControl;
+import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.DezenasSorteadasAdapter;
+import com.example.sv0021.poccrawler.view.adapter.ResultadoLoteriaAdapter;
+import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.sv0021.poccrawler.util.DataUtils.getDataFormatada;
 
 public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
 
     @Override
-    public void setTituloLoteria(LoteriaActivity context, ImageView ivIconeLoteria, TextView tvNomeLoteria) {
+    public void onSetTituloLoteria(LoteriaActivity context, ImageView ivIconeLoteria, TextView tvNomeLoteria) {
 
         tvNomeLoteria.setText(context.getLoteria().getNomeLoteria());
 
@@ -44,7 +58,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void pintarViews(String corPadrao, View viewTraco, TextView tvNomeLoteria, TextView tvGanhadores, TextView tvValorEstimado, ImageView ivAnterior, ImageView ivProximo) {
+    public void onPintarViews(String corPadrao, View viewTraco, TextView tvNomeLoteria, TextView tvGanhadores, TextView tvValorEstimado, ImageView ivAnterior, ImageView ivProximo) {
         tvNomeLoteria.setTextColor(Color.parseColor(corPadrao));
         tvGanhadores.setTextColor(Color.parseColor(corPadrao));
         tvValorEstimado.setTextColor(Color.parseColor(corPadrao));
@@ -54,11 +68,41 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void exibirResultadoPrincipal(LoteriaActivity context, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvDezenas) {
+    public void onAtualizarViewConcurso(LinearLayout llResultadosGerais, LinearLayout llResultadosDetalhados, LinearLayout llValorEstimado, int concursoAtual, int ultimoConcurso, ImageView ivAnterior, ImageView ivProximo) {
+        llResultadosGerais.setVisibility(View.GONE);
+        llResultadosDetalhados.setVisibility(View.GONE);
+        llValorEstimado.setVisibility(concursoAtual == ultimoConcurso ? View.VISIBLE : View.GONE);
+        ivAnterior.setVisibility(concursoAtual == 1 ? View.GONE : View.VISIBLE);
+        ivProximo.setVisibility(concursoAtual == ultimoConcurso ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
+    public void onConsultarConcurso(LoteriaActivity context, ResultadosLoteriaFragment fragment, int concurso) {
+        ProgressBarControl.mostrarProgressBar(context);
+        Service service = new RetrofitBuilder().getService();
+        service.getResultadoConcurso(context.getLoteria().getCodigoLoteria(), concurso).enqueue(new Callback<LoteriaResponse>() {
+            @Override
+            public void onResponse(Call<LoteriaResponse> call, Response<LoteriaResponse> response) {
+                ProgressBarControl.esconderProgressBar(context);
+                LoteriaResponse loteria = response.body();
+                context.setLoteria(loteria);
+                context.exibirMenuInferior(loteria.getCorPadrao());
+                fragment.exibirInfos();
+            }
+
+            @Override
+            public void onFailure(Call<LoteriaResponse> call, Throwable t) {
+                ProgressBarControl.esconderProgressBar(context);
+            }
+        });
+    }
+
+    @Override
+    public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvDezenas) {
 
         tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(context.getLoteria().getEstimativaPremio()));
 
-        int numGanhadores = context.getLoteria().getGanhadores().size();
+        int numGanhadores = context.getLoteria().getGanhadores().get(0);
         switch (numGanhadores){
             case 0:
                 tvGanhadores.setText(context
@@ -93,7 +137,39 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void setDataProximoSorteio(Date data, TextView tvData) {
+    public void onExibirResultadosSecundarios(LoteriaActivity context, RecyclerView rvResultados) {
+        LoteriaResponse loteria = context.getLoteria();
+        int qtdMaximaDezenasSorteadas = loteria.getDezenas().size();
+
+        List<ResultadoLoteria> resultados = new ArrayList<>();
+
+        for(int i = 0; i < loteria.getGanhadores().size(); i++){
+            int qtdGanhadores = loteria.getGanhadores().get(i);
+            double valorRateio = loteria.getRateio().get(i);
+            double valorTotal = loteria.getGanhadores().get(i) * loteria.getRateio().get(i);
+
+            ResultadoLoteria resultado = new ResultadoLoteria(
+                    qtdMaximaDezenasSorteadas,
+                    qtdGanhadores,
+                    valorRateio,
+                    valorTotal
+            );
+
+            resultados.add(resultado);
+            qtdMaximaDezenasSorteadas--;
+        }
+
+        ResultadoLoteriaAdapter adapter = new ResultadoLoteriaAdapter(
+                context,
+                resultados,
+                loteria.getCorPadrao()
+        );
+
+        rvResultados.setAdapter(adapter);
+    }
+
+    @Override
+    public void onSetDataProximoSorteio(Date data, TextView tvData) {
         tvData.setText(getDataFormatada(data));
     }
 
