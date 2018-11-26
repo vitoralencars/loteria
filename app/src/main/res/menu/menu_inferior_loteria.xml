@@ -4,12 +4,12 @@
     <item
         android:id="@+id/menu_concurso"
         android:title="Concurso"
-        android:icon="@drawable/ic_seta_esquerda" />
+        android:icon="@drawable/ic_menu_concurso" />
 
     <item
         android:id="@+id/menu_cartela"
         android:title="Cartela"
-        android:icon="@mipmap/ic_launcher_round"/>
+        android:icon="@drawable/ic_menu_cartela"/>
 
     <!--<item
         android:id="@+id/menu_inf_perfil"
