@@ -7,12 +7,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.application.LoteriasApplication;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Cartela;
+import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.presenter.CartelaPresenter;
+import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
+import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -51,7 +56,12 @@ public class CartelaImpl implements CartelaPresenter {
         int qtdDezenas = cartela.getQtdDesejadaDezenasSelecionadas() - cartela.getDezenasSelecionadas().size();
 
         if(qtdDezenas == 0){
-            context.exibirToast(context, "Você já selecionou o número máximo de dezenas para esta cartela");
+            context.exibirToast(
+                    context,
+                    context
+                            .getResources()
+                            .getString(R.string.erro_qtd_maxima_dezenas_selecionadas)
+            );
         }else {
             List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
             for (int i = 0; i < qtdDezenas; i++) {
@@ -177,5 +187,52 @@ public class CartelaImpl implements CartelaPresenter {
         }
 
         cartela.setQtdDesejadaDezenasSelecionadas(qtdDesejadaSelecionada);
+    }
+
+    @Override
+    public void onSalvarJogo(LoteriaActivity context, CartelaFragment fragment, Cartela cartela) {
+
+        if(cartela.getDezenasSelecionadas().size() < cartela.getQtdDesejadaDezenasSelecionadas()){
+            context.exibirToast(
+                    context,
+                    context
+                            .getResources()
+                            .getString(
+                                    R.string.erro_qtd_minima_dezenas_selecionadas,
+                                    Integer.toString(cartela.getQtdDesejadaDezenasSelecionadas())
+                            )
+            );
+        }else{
+            List<Integer> dezenas = new ArrayList<>();
+            for (DezenaCartela dezena : cartela.getDezenasSelecionadas()) {
+                dezenas.add(dezena.getDezena());
+            }
+
+            List<JogoSalvo> jogoSalvos = context.getJogosSalvos();
+            jogoSalvos.add(new JogoSalvo(context.getUltimoConcurso(), dezenas));
+
+            String jsonJogos = new Gson().toJson(jogoSalvos);
+
+            String key = "";
+            switch (context.getLoteria().getCodigoLoteria()){
+                case TipoLoteria.MEGA_SENA:
+                    key = Constants.SHARED_PREFS_JOGOS_MEGA_SENA;
+                    break;
+                case TipoLoteria.LOTOFACIL:
+                    key = Constants.SHARED_PREFS_JOGOS_LOTOFACIL;
+                    break;
+                case TipoLoteria.QUINA:
+                    key = Constants.SHARED_PREFS_JOGOS_QUINA;
+                    break;
+                case TipoLoteria.LOTOMANIA:
+                    key = Constants.SHARED_PREFS_JOGOS_LOTOMANIA;
+                    break;
+            }
+
+            LoteriasApplication.savePreferences(key, jsonJogos);
+
+            context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
+            fragment.limparCartela();
+        }
     }
 }

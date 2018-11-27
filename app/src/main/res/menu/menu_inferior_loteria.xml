@@ -11,9 +11,9 @@
         android:title="Cartela"
         android:icon="@drawable/ic_menu_cartela"/>
 
-    <!--<item
-        android:id="@+id/menu_inf_perfil"
-        android:title="Perfil"
-        android:icon="@drawable/ic_perfil_24dp"/>-->
+    <item
+        android:id="@+id/menu_jogos_salvos"
+        android:title="Jogos Salvos"
+        android:icon="@drawable/ic_menu_jogos_salvos"/>
 
 </menu>

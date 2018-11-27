@@ -30,7 +30,7 @@ public class ResultadosLoteriaFragment extends Fragment {
 
     private ResultadosLoteriaImpl impl = new ResultadosLoteriaImpl();
 
-    private int ultimoConcurso, concursoAtual;
+    private int concursoAtual;
 
     public ResultadosLoteriaFragment() {
         // Required empty public constructor
@@ -42,7 +42,6 @@ public class ResultadosLoteriaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resultados_loteria, container, false);
         activity = (LoteriaActivity)getActivity();
-        ultimoConcurso = activity.getLoteria().getConcurso();
         concursoAtual = activity.getLoteria().getConcurso();
 
         initView(view);
@@ -111,7 +110,7 @@ public class ResultadosLoteriaFragment extends Fragment {
                 llResultadosDetalhados,
                 llValorEstimado,
                 concursoAtual,
-                ultimoConcurso,
+                activity.getUltimoConcurso(),
                 ivAnterior,
                 ivProximo
         );

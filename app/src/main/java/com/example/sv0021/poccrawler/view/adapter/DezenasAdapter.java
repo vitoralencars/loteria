@@ -15,13 +15,13 @@ import com.example.sv0021.poccrawler.R;
 import java.util.Collections;
 import java.util.List;
 
-public class DezenasSorteadasAdapter extends RecyclerView.Adapter<DezenasSorteadasAdapter.ViewHolder>{
+public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHolder>{
 
     private Context context;
     private String corPadrao;
     private List<Integer> dezenas;
 
-    public DezenasSorteadasAdapter(Context context, String corPadrao, List<Integer> dezenas) {
+    public DezenasAdapter(Context context, String corPadrao, List<Integer> dezenas) {
         this.context = context;
         this.corPadrao = corPadrao;
         this.dezenas = dezenas;
@@ -35,7 +35,7 @@ public class DezenasSorteadasAdapter extends RecyclerView.Adapter<DezenasSortead
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.item_dezena_cartela, viewGroup, false);
 
-        return new DezenasSorteadasAdapter.ViewHolder(row);
+        return new DezenasAdapter.ViewHolder(row);
     }
 
     @Override

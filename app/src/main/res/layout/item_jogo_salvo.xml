@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="4dp"
+    android:paddingTop="@dimen/padding_tiny"
+    android:paddingStart="@dimen/padding_normal"
+    android:paddingEnd="@dimen/padding_normal"
+    android:paddingBottom="@dimen/padding_small"
+    android:orientation="vertical">
+
+    <TextView style="@style/TextoCentralizado"
+        android:id="@+id/tvConcurso"
+        android:textStyle="bold"
+        android:textColor="@color/preto"
+        android:text="Concurso: 2001"/>
+
+    <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+        android:layout_marginTop="@dimen/margin_border">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDezenas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="6"/>
+
+        <TextView
+            android:id="@+id/tvAcertos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="end"
+            android:textColor="@color/cinza"
+            android:text="3 acertos"/>
+
+    </LinearLayout>
+
+</LinearLayout>

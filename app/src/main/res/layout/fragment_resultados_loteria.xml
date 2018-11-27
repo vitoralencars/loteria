@@ -10,7 +10,7 @@
 
         <LinearLayout style="@style/SimpleLinearLayoutVertical"
             android:background="@color/branco"
-            android:elevation="3dp">
+            android:elevation="4dp">
 
             <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
                 android:padding="@dimen/padding_small">
@@ -147,8 +147,9 @@
             android:id="@+id/llResultadosDetalhados"
             android:padding="@dimen/padding_normal"
             android:layout_marginTop="@dimen/margin_border"
+            android:layout_marginBottom="@dimen/margin_tiny"
             android:background="@color/branco"
-            android:elevation="3dp"
+            android:elevation="4dp"
             android:visibility="gone">
 
             <TextView

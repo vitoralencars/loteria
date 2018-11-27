@@ -57,4 +57,10 @@ public interface CartelaPresenter {
             int position,
             Cartela cartela
     );
+
+    void onSalvarJogo(
+            LoteriaActivity context,
+            CartelaFragment fragment,
+            Cartela cartela
+    );
 }

@@ -50,12 +50,17 @@
         <Button style="@style/BotaoCartela"
             android:id="@+id/btnCompletarCartela"
             android:layout_marginTop="@dimen/margin_normal"
-            android:text="Completar Cartela"/>
+            android:text="Completar"/>
+
+        <Button style="@style/BotaoCartela"
+            android:id="@+id/btnSalvarCartela"
+            android:textAllCaps="false"
+            android:text="Salvar"/>
 
         <Button style="@style/BotaoCartela"
             android:id="@+id/btnLimparCartela"
             android:textAllCaps="false"
-            android:text="Limpar Cartela"/>
+            android:text="Limpar"/>
 
     </LinearLayout>
 

@@ -20,7 +20,7 @@ import com.example.sv0021.poccrawler.retrofit.Service;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.ProgressBarControl;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
-import com.example.sv0021.poccrawler.view.adapter.DezenasSorteadasAdapter;
+import com.example.sv0021.poccrawler.view.adapter.DezenasAdapter;
 import com.example.sv0021.poccrawler.view.adapter.ResultadoLoteriaAdapter;
 import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
 
@@ -86,7 +86,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 ProgressBarControl.esconderProgressBar(context);
                 LoteriaResponse loteria = response.body();
                 context.setLoteria(loteria);
-                context.exibirMenuInferior(loteria.getCorPadrao());
+                context.exibirMenuInferior();
                 fragment.exibirInfos();
             }
 
@@ -123,7 +123,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 break;
         }
 
-        DezenasSorteadasAdapter adapter = new DezenasSorteadasAdapter(
+        DezenasAdapter adapter = new DezenasAdapter(
                 context,
                 context.getLoteria().getCorPadrao(),
                 context.getLoteria().getDezenas()

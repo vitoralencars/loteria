@@ -116,7 +116,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
 
     private void listarDezenasSorteadas(ViewHolder holder, LoteriaResponse loteria){
 
-        DezenasSorteadasAdapter adapter = new DezenasSorteadasAdapter(
+        DezenasAdapter adapter = new DezenasAdapter(
                 context,
                 loteria.getCorPadrao(),
                 loteria.getDezenas()

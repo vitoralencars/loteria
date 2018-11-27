@@ -1,6 +1,7 @@
 package com.example.sv0021.poccrawler.view.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +36,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     private TextView tvDezenasSelecionadas;
     private RecyclerView rvDezenas;
     private Spinner spQtdDezenas;
-    private Button btnCompletar, btnLimpar;
+    private Button btnCompletar, btnSalvar, btnLimpar;
 
     private CartelaAdapter adapter;
     private LoteriaActivity activity;
@@ -66,11 +67,22 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         rvDezenas = v.findViewById(R.id.rvDezenas);
         spQtdDezenas = v.findViewById(R.id.spQtdDezenas);
         btnCompletar = v.findViewById(R.id.btnCompletarCartela);
+        btnSalvar = v.findViewById(R.id.btnSalvarCartela);
         btnLimpar = v.findViewById(R.id.btnLimparCartela);
     }
 
     private void initEvents(){
+        btnCompletar.setBackgroundColor(Color.parseColor(activity.getLoteria().getCorPadrao()));
+        btnSalvar.setBackgroundColor(Color.parseColor(activity.getLoteria().getCorPadrao()));
+        btnLimpar.setBackgroundColor(Color.parseColor(activity.getLoteria().getCorPadrao()));
+
         btnCompletar.setOnClickListener(view -> cartelaImpl.onCompletarCartela(
+                activity,
+                CartelaFragment.this,
+                cartela
+        ));
+
+        btnSalvar.setOnClickListener(view -> cartelaImpl.onSalvarJogo(
                 activity,
                 CartelaFragment.this,
                 cartela
@@ -132,8 +144,11 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         );
     }
 
-    public void atualizarTextoDezenasSelecionadas(List<DezenaCartela> dezenasSelecionados){
-        cartelaImpl.onExibirDezenasSelecionadas(tvDezenasSelecionadas, dezenasSelecionados);
+    public void atualizarTextoDezenasSelecionadas(List<DezenaCartela> dezenasSelecionadas){
+        cartelaImpl.onExibirDezenasSelecionadas(
+                tvDezenasSelecionadas,
+                dezenasSelecionadas
+        );
     }
 
     public void setAdapter(CartelaAdapter adapter){

@@ -1,20 +1,26 @@
 package com.example.sv0021.poccrawler.presenter;
 
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
+import android.widget.FrameLayout;
 
+import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
+
+import java.util.List;
 
 public interface LoteriaPresenter {
 
-    void onMontarViewPager(
-            LoteriaActivity context,
-            ViewPager viewPager
+    void onSetPrimeiroFragment(
+            LoteriaActivity context
     );
 
     void onSetNavigationListener(
-            ViewPager viewPager,
-            BottomNavigationView bnvMenu
+            LoteriaActivity context,
+            BottomNavigationView bnvMenu,
+            FrameLayout frameLayout
     );
 
+    List<JogoSalvo> onGetJogosSalvos(
+            int tipoLoteria
+    );
 }

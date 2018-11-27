@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.LoteriaImpl;
+import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.Constants;
+
+import java.util.List;
 
 public class LoteriaActivity extends BaseActivity {
 
@@ -18,8 +21,10 @@ public class LoteriaActivity extends BaseActivity {
 
     private LoteriaResponse loteria;
 
-    private ViewPager vpLoteria;
     private BottomNavigationView bnvMenu;
+    private FrameLayout flFragments;
+
+    private int ultimoConcurso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +36,20 @@ public class LoteriaActivity extends BaseActivity {
     }
 
     private void initView(){
-        vpLoteria = findViewById(R.id.vpLoteria);
         bnvMenu = findViewById(R.id.bnvMenu);
+        flFragments = findViewById(R.id.flFragments);
     }
 
     private void recuperarIntent(Intent intent){
         if(intent != null){
             loteria = (LoteriaResponse)intent.getExtras().getSerializable(Constants.EXTRA_LOTERIA);
+            ultimoConcurso = loteria.getConcurso();
         }
     }
 
     private void configurarComponentes(){
-        impl.onMontarViewPager(this, vpLoteria);
-        impl.onSetNavigationListener(vpLoteria, bnvMenu);
+        impl.onSetNavigationListener(this, bnvMenu, flFragments);
+        impl.onSetPrimeiroFragment(this);
     }
 
     public LoteriaResponse getLoteria() {
@@ -54,9 +60,16 @@ public class LoteriaActivity extends BaseActivity {
         this.loteria = loteria;
     }
 
-    public void exibirMenuInferior(String corPadrao){
+    public int getUltimoConcurso(){
+        return this.ultimoConcurso;
+    }
+
+    public void exibirMenuInferior(){
         bnvMenu.setVisibility(View.VISIBLE);
         bnvMenu.setBackgroundColor(Color.parseColor(loteria.getCorPadrao()));
     }
 
+    public List<JogoSalvo> getJogosSalvos(){
+        return impl.onGetJogosSalvos(loteria.getCodigoLoteria());
+    }
 }
