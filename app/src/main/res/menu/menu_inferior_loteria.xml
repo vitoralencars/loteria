@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/menu_cartela"
-        android:title="Cartela"
+        android:title="Volante"
         android:icon="@drawable/ic_menu_cartela"/>
 
     <item

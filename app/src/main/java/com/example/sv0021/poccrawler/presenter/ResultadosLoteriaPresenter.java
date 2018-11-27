@@ -52,7 +52,7 @@ public interface ResultadosLoteriaPresenter {
             RecyclerView rvDezenas
     );
 
-    void onExibirResultadosSecundarios(
+    void onExibirResultadosDetalhados(
             LoteriaActivity context,
             RecyclerView rvResultados
     );

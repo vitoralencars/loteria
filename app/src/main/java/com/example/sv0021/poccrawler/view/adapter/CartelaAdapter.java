@@ -46,6 +46,10 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
                 Integer.toString(dezena.getDezena()) :
                 "0" + dezena.getDezena();
 
+        if(dezenaCartela.length() == 3){
+            dezenaCartela = Character.toString(dezenaCartela.charAt(1)) + Character.toString(dezenaCartela.charAt(2));
+        }
+
         holder.tvDezena.setText(dezenaCartela);
         atualizarBackground(dezena, holder.tvDezena);
     }

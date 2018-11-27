@@ -28,7 +28,6 @@ public class LoteriaImpl implements LoteriaPresenter {
 
     @Override
     public void onSetPrimeiroFragment(LoteriaActivity context) {
-        //bnvMenu.setSelectedItemId(R.id.menu_cartela);
         atualizarFrameLayout(context, new ResultadosLoteriaFragment());
     }
 

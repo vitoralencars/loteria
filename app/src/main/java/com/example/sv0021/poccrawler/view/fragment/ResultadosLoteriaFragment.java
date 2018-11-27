@@ -133,7 +133,7 @@ public class ResultadosLoteriaFragment extends Fragment {
                 rvDezenas
         );
 
-        impl.onExibirResultadosSecundarios(
+        impl.onExibirResultadosDetalhados(
                 activity,
                 rvResultados
         );

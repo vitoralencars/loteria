@@ -122,7 +122,7 @@ public class CartelaImpl implements CartelaPresenter {
         List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
         if(dezena.isSelecionado()) {
             if(dezenasSelecionadas.size() == cartela.getQtdDesejadaDezenasSelecionadas()){
-                context.exibirToast(context, "Você já selecionou o número máximo de dezenas para esta cartela");
+                context.exibirToast(context, context.getResources().getString(R.string.erro_qtd_maxima_dezenas_selecionadas));
                 dezena.setSelecionado(false);
             }else {
                 cartela.setDezenasDisponiveis(ArrayUtils.remove(cartela.getDezenasDisponiveis(), indexArray));
@@ -147,6 +147,10 @@ public class CartelaImpl implements CartelaPresenter {
             DezenaCartela dezena = dezenasSelecionados.get(i);
             String dezenaTexto = dezena.getDezena() >= 10 ?
                     Integer.toString(dezena.getDezena()) : "0" + dezena.getDezena();
+
+            if(dezenaTexto.length() == 3){
+                dezenaTexto = Character.toString(dezenaTexto.charAt(1)) + Character.toString(dezenaTexto.charAt(2));
+            }
 
             listaDezenas += i > 0 ? " - " + dezenaTexto : dezenaTexto;
         }
@@ -209,25 +213,11 @@ public class CartelaImpl implements CartelaPresenter {
             }
 
             List<JogoSalvo> jogoSalvos = context.getJogosSalvos();
-            jogoSalvos.add(new JogoSalvo(context.getUltimoConcurso(), dezenas));
+            jogoSalvos.add(new JogoSalvo(context.getUltimoConcurso() + 1, dezenas));
 
             String jsonJogos = new Gson().toJson(jogoSalvos);
 
-            String key = "";
-            switch (context.getLoteria().getCodigoLoteria()){
-                case TipoLoteria.MEGA_SENA:
-                    key = Constants.SHARED_PREFS_JOGOS_MEGA_SENA;
-                    break;
-                case TipoLoteria.LOTOFACIL:
-                    key = Constants.SHARED_PREFS_JOGOS_LOTOFACIL;
-                    break;
-                case TipoLoteria.QUINA:
-                    key = Constants.SHARED_PREFS_JOGOS_QUINA;
-                    break;
-                case TipoLoteria.LOTOMANIA:
-                    key = Constants.SHARED_PREFS_JOGOS_LOTOMANIA;
-                    break;
-            }
+            String key = LoteriasApplication.getPreferenceKey(context.getLoteria().getCodigoLoteria());
 
             LoteriasApplication.savePreferences(key, jsonJogos);
 

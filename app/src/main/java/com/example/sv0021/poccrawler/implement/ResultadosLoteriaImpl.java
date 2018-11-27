@@ -137,13 +137,18 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void onExibirResultadosSecundarios(LoteriaActivity context, RecyclerView rvResultados) {
+    public void onExibirResultadosDetalhados(LoteriaActivity context, RecyclerView rvResultados) {
         LoteriaResponse loteria = context.getLoteria();
         int qtdMaximaDezenasSorteadas = loteria.getDezenas().size();
 
         List<ResultadoLoteria> resultados = new ArrayList<>();
 
         for(int i = 0; i < loteria.getGanhadores().size(); i++){
+            if(i == loteria.getGanhadores().size() - 1
+                    && context.getLoteria().getCodigoLoteria() == TipoLoteria.LOTOMANIA){
+                qtdMaximaDezenasSorteadas = 0;
+            }
+
             int qtdGanhadores = loteria.getGanhadores().get(i);
             double valorRateio = loteria.getRateio().get(i);
             double valorTotal = loteria.getGanhadores().get(i) * loteria.getRateio().get(i);

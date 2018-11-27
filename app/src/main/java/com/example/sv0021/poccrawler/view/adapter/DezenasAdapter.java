@@ -44,6 +44,10 @@ public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHold
         String valor = dezenas.get(position) >= 10
                 ? Integer.toString(dezenas.get(position)) : "0" + dezenas.get(position);
 
+        if(valor.length() == 3){
+            valor = Character.toString(valor.charAt(1)) + Character.toString(valor.charAt(2));
+        }
+
         holder.tvDezena.setText(valor);
         setBackground(holder);
 
