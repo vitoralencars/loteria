@@ -32,7 +32,7 @@ public class LoteriaImpl implements LoteriaPresenter {
     }
 
     @Override
-    public void onSetNavigationListener(LoteriaActivity context, BottomNavigationView bnvMenu, FrameLayout frameLayout) {
+    public void onSetNavigationListener(LoteriaActivity context, BottomNavigationView bnvMenu) {
         bnvMenu.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()){
                 case R.id.menu_concurso:

@@ -16,8 +16,7 @@ public interface LoteriaPresenter {
 
     void onSetNavigationListener(
             LoteriaActivity context,
-            BottomNavigationView bnvMenu,
-            FrameLayout frameLayout
+            BottomNavigationView bnvMenu
     );
 
     List<JogoSalvo> onGetJogosSalvos(

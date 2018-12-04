@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.LoteriaImpl;
@@ -22,7 +21,6 @@ public class LoteriaActivity extends BaseActivity {
     private LoteriaResponse loteria;
 
     private BottomNavigationView bnvMenu;
-    private FrameLayout flFragments;
 
     private int ultimoConcurso;
 
@@ -37,7 +35,6 @@ public class LoteriaActivity extends BaseActivity {
 
     private void initView(){
         bnvMenu = findViewById(R.id.bnvMenu);
-        flFragments = findViewById(R.id.flFragments);
     }
 
     private void recuperarIntent(Intent intent){
@@ -48,7 +45,7 @@ public class LoteriaActivity extends BaseActivity {
     }
 
     private void configurarComponentes(){
-        impl.onSetNavigationListener(this, bnvMenu, flFragments);
+        impl.onSetNavigationListener(this, bnvMenu);
         impl.onSetPrimeiroFragment(this);
     }
 
