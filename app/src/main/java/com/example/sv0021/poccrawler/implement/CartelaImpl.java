@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -217,10 +218,11 @@ public class CartelaImpl implements CartelaPresenter {
             if(concursosSalvos.size() > 0 &&
                     concursosSalvos.get(0).getNumConcurso() == proximoConcurso){
 
-                concursosSalvos.get(0).getJogosSalvos().add(new JogoSalvo(dezenas));
+                concursosSalvos.get(0).getJogosSalvos().add(
+                        new JogoSalvo(System.currentTimeMillis(), dezenas));
             }else{
                 List<JogoSalvo> jogosSalvos = new ArrayList<>();
-                jogosSalvos.add(new JogoSalvo(dezenas));
+                jogosSalvos.add(new JogoSalvo(System.currentTimeMillis(), dezenas));
 
                 concursosSalvos.add(
                         new Concurso(proximoConcurso, jogosSalvos));
