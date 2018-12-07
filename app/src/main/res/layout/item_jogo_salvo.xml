@@ -3,34 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="4dp"
     android:paddingTop="@dimen/padding_tiny"
     android:paddingStart="@dimen/padding_small"
     android:paddingEnd="@dimen/padding_small"
     android:paddingBottom="@dimen/padding_small"
-    android:layout_margin="@dimen/margin_border"
     android:background="@color/branco"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+        android:layout_marginTop="@dimen/margin_border">
 
-        <TextView
-            android:id="@+id/tvConcurso"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDezenas"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textStyle="bold"
-            android:textColor="@color/preto"
-            android:text="Concurso: 2001"/>
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="6"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llEdicaoRemocao"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal">
+            android:layout_weight="3"
+            android:gravity="end"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivEditar"
@@ -49,31 +49,16 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
-
-    <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
-        android:layout_marginTop="@dimen/margin_border">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDezenas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="6"/>
-
         <TextView
             android:id="@+id/tvAcertos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2.5"
+            android:layout_weight="3"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/cinza"
             android:textSize="@dimen/font_small"
-            android:text="3 acertos"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
 
     </LinearLayout>
 

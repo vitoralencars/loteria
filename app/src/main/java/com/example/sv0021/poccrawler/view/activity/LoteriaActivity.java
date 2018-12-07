@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.LoteriaImpl;
-import com.example.sv0021.poccrawler.model.JogoSalvo;
+import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.Constants;
 
@@ -66,7 +66,7 @@ public class LoteriaActivity extends BaseActivity {
         bnvMenu.setBackgroundColor(Color.parseColor(loteria.getCorPadrao()));
     }
 
-    public List<JogoSalvo> getJogosSalvos(){
-        return impl.onGetJogosSalvos(loteria.getCodigoLoteria());
+    public List<Concurso> getConcursosSalvos(){
+        return impl.onGetConcursosSalvos(loteria.getCodigoLoteria());
     }
 }

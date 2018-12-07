@@ -18,7 +18,7 @@ import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 public class JogosSalvosFragment extends Fragment {
 
     private LoteriaActivity activity;
-    private RecyclerView rvJogosSalvos;
+    private RecyclerView rvConcursos;
 
     private JogosSalvosImpl impl = new JogosSalvosImpl();
 
@@ -33,17 +33,17 @@ public class JogosSalvosFragment extends Fragment {
         activity = (LoteriaActivity)getActivity();
 
         initView(view);
-        listarJogosSalvos();
+        listarConcursosSalvos();
 
         return view;
     }
 
     private void initView(View v){
-        rvJogosSalvos = v.findViewById(R.id.rvJogosSalvos);
+        rvConcursos = v.findViewById(R.id.rvConcursos);
     }
 
-    private void listarJogosSalvos(){
-        impl.onListarJogosSalvos(activity, rvJogosSalvos);
+    private void listarConcursosSalvos(){
+        impl.onListarConcursos(activity, rvConcursos);
     }
 
 }

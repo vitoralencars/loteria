@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.application.LoteriasApplication;
+import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.google.gson.Gson;
@@ -20,11 +22,13 @@ import java.util.List;
 public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.ViewHolder>{
 
     private LoteriaActivity context;
-    private List<JogoSalvo> jogosSalvos;
+    private Concurso concurso;
+    private ConcursosAdapter concursosAdapter;
 
-    public JogosSalvosAdapter(LoteriaActivity context) {
+    public JogosSalvosAdapter(LoteriaActivity context, Concurso concurso, ConcursosAdapter concursosAdapter) {
         this.context = context;
-        this.jogosSalvos = context.getJogosSalvos();
+        this.concurso = concurso;
+        this.concursosAdapter = concursosAdapter;
     }
 
     @NonNull
@@ -37,19 +41,11 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-        JogoSalvo jogo = jogosSalvos.get(i);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        JogoSalvo jogo = concurso.getJogosSalvos().get(position);
 
-        holder.tvConcurso.setText("Concurso: " + jogo.getConcurso());
-
-        if(jogo.getConcurso() > context.getUltimoConcurso()){
-            holder.tvAcertos.setText("Aguardando\nsorteio");
-            holder.tvAcertos.setVisibility(View.VISIBLE);
-            holder.ivEditar.setVisibility(View.VISIBLE);
-        }else{
-            holder.tvAcertos.setVisibility(View.GONE);
-            holder.ivEditar.setVisibility(View.GONE);
-        }
+        boolean concursoRealizado = concurso.getNumConcurso() <= context.getUltimoConcurso();
+        holder.llEdicaoRemocao.setVisibility(concursoRealizado ? View.GONE : View.VISIBLE);
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
@@ -57,36 +53,55 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
                 jogo.getDezenas()
         );
 
-        holder.ivRemover.setOnClickListener(view -> removerJogoSalvo(i));
+        holder.ivRemover.setOnClickListener(view -> removerJogoSalvo(position));
 
         holder.rvDezenas.setAdapter(adapter);
     }
 
     @Override
     public int getItemCount() {
-        return jogosSalvos.size();
+        return concurso.getJogosSalvos().size();
+    }
+
+    private void editarJogoSalvo(int position){
+
     }
 
     private void removerJogoSalvo(int position){
-        jogosSalvos.remove(position);
+        int index = 0;
+        List<Concurso> concursos = context.getConcursosSalvos();
+
+        for(Concurso concurso : concursos){
+            if(concurso.getNumConcurso() == concursos.get(index).getNumConcurso()){
+                break;
+            }
+            index++;
+        }
+
+        concursos.get(index).getJogosSalvos().remove(position);
+
+        if(concursos.get(index).getJogosSalvos().size() == 0){
+            concursos.remove(index);
+        }
 
         String key = LoteriasApplication.getPreferenceKey(context.getLoteria().getCodigoLoteria());
-        String jsonJogos = new Gson().toJson(jogosSalvos);
-        LoteriasApplication.savePreferences(key, jsonJogos);
+        String jsonConcursos = new Gson().toJson(concursos);
+        LoteriasApplication.savePreferences(key, jsonConcursos);
 
-        notifyDataSetChanged();
+        concursosAdapter.notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvConcurso, tvAcertos;
+        LinearLayout llEdicaoRemocao;
+        TextView tvAcertos;
         ImageView ivEditar, ivRemover;
         RecyclerView rvDezenas;
 
         ViewHolder(@NonNull View view) {
             super(view);
 
-            tvConcurso = view.findViewById(R.id.tvConcurso);
+            llEdicaoRemocao = view.findViewById(R.id.llEdicaoRemocao);
             tvAcertos = view.findViewById(R.id.tvAcertos);
             ivEditar = view.findViewById(R.id.ivEditar);
             ivRemover = view.findViewById(R.id.ivRemover);

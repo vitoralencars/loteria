@@ -9,12 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
 
-    private Retrofit retrofit;
     private Service service;
 
     public RetrofitBuilder(){
-        retrofit = initRetrofit(Constants.BASE_API_URL);
-        service = initService(retrofit);
+        service = initService(initRetrofit(Constants.BASE_API_URL));
     }
 
     private Gson gson = new GsonBuilder()

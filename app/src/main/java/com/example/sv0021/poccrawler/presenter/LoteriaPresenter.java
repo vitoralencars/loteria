@@ -3,6 +3,7 @@ package com.example.sv0021.poccrawler.presenter;
 import android.support.design.widget.BottomNavigationView;
 import android.widget.FrameLayout;
 
+import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 
@@ -19,7 +20,7 @@ public interface LoteriaPresenter {
             BottomNavigationView bnvMenu
     );
 
-    List<JogoSalvo> onGetJogosSalvos(
+    List<Concurso> onGetConcursosSalvos(
             int tipoLoteria
     );
 }

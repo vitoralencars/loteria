@@ -6,9 +6,9 @@ import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 
 public interface JogosSalvosPresenter {
 
-    void onListarJogosSalvos(
+    void onListarConcursos(
             LoteriaActivity context,
-            RecyclerView rvJogosSalvos
+            RecyclerView rvConcursos
     );
 
 }

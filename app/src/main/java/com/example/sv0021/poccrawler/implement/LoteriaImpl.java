@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
+import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.presenter.LoteriaPresenter;
 import com.example.sv0021.poccrawler.util.Constants;
@@ -53,7 +54,7 @@ public class LoteriaImpl implements LoteriaPresenter {
     }
 
     @Override
-    public List<JogoSalvo> onGetJogosSalvos(int tipoLoteria) {
+    public List<Concurso> onGetConcursosSalvos(int tipoLoteria) {
 
         String key = "";
         switch (tipoLoteria){
@@ -75,11 +76,11 @@ public class LoteriaImpl implements LoteriaPresenter {
         if(json.isEmpty()){
             return new ArrayList<>();
         }else{
-            Type type = new TypeToken<List<JogoSalvo>>() {}.getType();
-            List<JogoSalvo> jogoSalvos = new Gson().fromJson(json, type);
-            Collections.sort(jogoSalvos, (o1, o2) -> o2.getConcurso() - o1.getConcurso());
+            Type type = new TypeToken<List<Concurso>>() {}.getType();
+            List<Concurso> concursos = new Gson().fromJson(json, type);
+            Collections.sort(concursos, (o1, o2) -> o2.getNumConcurso() - o1.getNumConcurso());
 
-            return jogoSalvos;
+            return concursos;
         }
     }
 

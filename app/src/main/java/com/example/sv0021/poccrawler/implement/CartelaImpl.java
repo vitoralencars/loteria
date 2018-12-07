@@ -8,12 +8,11 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.application.LoteriasApplication;
-import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
+import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.presenter.CartelaPresenter;
-import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
@@ -212,14 +211,26 @@ public class CartelaImpl implements CartelaPresenter {
                 dezenas.add(dezena.getDezena());
             }
 
-            List<JogoSalvo> jogoSalvos = context.getJogosSalvos();
-            jogoSalvos.add(new JogoSalvo(context.getUltimoConcurso() + 1, dezenas));
+            List<Concurso> concursosSalvos = context.getConcursosSalvos();
 
-            String jsonJogos = new Gson().toJson(jogoSalvos);
+            int proximoConcurso = context.getUltimoConcurso() + 1;
+            if(concursosSalvos.size() > 0 &&
+                    concursosSalvos.get(0).getNumConcurso() == proximoConcurso){
+
+                concursosSalvos.get(0).getJogosSalvos().add(new JogoSalvo(dezenas));
+            }else{
+                List<JogoSalvo> jogosSalvos = new ArrayList<>();
+                jogosSalvos.add(new JogoSalvo(dezenas));
+
+                concursosSalvos.add(
+                        new Concurso(proximoConcurso, jogosSalvos));
+            }
+
+            String jsonConcursos = new Gson().toJson(concursosSalvos);
 
             String key = LoteriasApplication.getPreferenceKey(context.getLoteria().getCodigoLoteria());
 
-            LoteriasApplication.savePreferences(key, jsonJogos);
+            LoteriasApplication.savePreferences(key, jsonConcursos);
 
             context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
             fragment.limparCartela();
