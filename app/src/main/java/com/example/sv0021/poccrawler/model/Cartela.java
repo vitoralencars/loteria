@@ -10,7 +10,6 @@ public class Cartela {
     private int[] dezenasDisponiveis;
     private List<DezenaCartela> dezenasCartela = new ArrayList<>();
     private List<DezenaCartela> dezenasSelecionadas = new ArrayList<>();
-    private String corPadrao;
 
     public int getQtdDezenasCartela() {
         return qtdDezenasCartela;
@@ -68,11 +67,4 @@ public class Cartela {
         this.dezenasSelecionadas = dezenasSelecionadas;
     }
 
-    public String getCorPadrao() {
-        return corPadrao;
-    }
-
-    public void setCorPadrao(String corPadrao) {
-        this.corPadrao = corPadrao;
-    }
 }

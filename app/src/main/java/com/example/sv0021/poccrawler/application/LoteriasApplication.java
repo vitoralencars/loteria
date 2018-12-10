@@ -26,7 +26,7 @@ public class LoteriasApplication extends Application {
         return getSharedPreferences().edit();
     }
 
-    public static void savePreferences(String key, String valor){
+    private static void savePreferences(String key, String valor){
         SharedPreferences.Editor editor = getPreferencesEditor();
         editor.putString(key, valor);
         editor.commit();
@@ -49,6 +49,10 @@ public class LoteriasApplication extends Application {
         }
 
         return "";
+    }
+
+    public static void salvarJogo(int codLoteria, String json){
+        savePreferences(getPreferenceKey(codLoteria), json);
     }
 
 }

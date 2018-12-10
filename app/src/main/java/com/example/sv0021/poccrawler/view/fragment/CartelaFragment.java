@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class CartelaFragment extends Fragment implements DezenaClickListener {
 
-    private CartelaImpl cartelaImpl = new CartelaImpl();
+    private CartelaImpl impl = new CartelaImpl();
 
     private Cartela cartela;
 
@@ -45,7 +45,6 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +57,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         montarCartela();
         initSpinner();
         initEvents();
+        verificarEdicaoJogo();
 
         return view;
     }
@@ -76,13 +76,13 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         btnSalvar.setBackgroundColor(Color.parseColor(activity.getLoteria().getCorPadrao()));
         btnLimpar.setBackgroundColor(Color.parseColor(activity.getLoteria().getCorPadrao()));
 
-        btnCompletar.setOnClickListener(view -> cartelaImpl.onCompletarCartela(
+        btnCompletar.setOnClickListener(view -> impl.onCompletarCartela(
                 activity,
                 CartelaFragment.this,
                 cartela
         ));
 
-        btnSalvar.setOnClickListener(view -> cartelaImpl.onSalvarJogo(
+        btnSalvar.setOnClickListener(view -> impl.onSalvarJogo(
                 activity,
                 CartelaFragment.this,
                 cartela
@@ -93,7 +93,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         spQtdDezenas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                cartelaImpl.onSpinnerSelectionListener(
+                impl.onSpinnerSelectionListener(
                         activity,
                         CartelaFragment.this,
                         position,
@@ -116,11 +116,10 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         cartela.setQtdDezenasCartela(loteria.getQtdDezenasTotal());
         cartela.setQtdMaximaDezenasSelecionadas(loteria.getQtdMaximaDezenasAposta());
         cartela.setQtdMinimaDezenasSelecionadas(loteria.getQtdMinimaDezenasAposta());
-        cartela.setCorPadrao(loteria.getCorPadrao());
     }
 
     private void initSpinner(){
-        cartelaImpl.onInitSpinnerQtdDezenas(
+        impl.onInitSpinnerQtdDezenas(
                 activity,
                 spQtdDezenas,
                 cartela
@@ -128,7 +127,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     public void montarCartela(){
-        cartelaImpl.onMontarCartela(
+        impl.onMontarCartela(
                 activity,
                 this,
                 cartela,
@@ -137,7 +136,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     public void limparCartela(){
-        cartelaImpl.onLimparCartela(
+        impl.onLimparCartela(
                 activity,
                 this,
                 cartela
@@ -145,10 +144,17 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     public void atualizarTextoDezenasSelecionadas(List<DezenaCartela> dezenasSelecionadas){
-        cartelaImpl.onExibirDezenasSelecionadas(
+        impl.onExibirDezenasSelecionadas(
                 tvDezenasSelecionadas,
                 dezenasSelecionadas
         );
+    }
+
+    private void verificarEdicaoJogo(){
+        if(activity.getIdJogoEdicao() != null){
+            impl.onMontarCartelaEdicao(activity, activity.getIdJogoEdicao(), spQtdDezenas,this, cartela);
+            activity.desativarEdicao();
+        }
     }
 
     public void setAdapter(CartelaAdapter adapter){
@@ -161,7 +167,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
 
     @Override
     public void onItemClick(int position, TextView tvDezena) {
-        cartelaImpl.onDezenaClick(
+        impl.onDezenaClick(
                 activity,
                 CartelaFragment.this,
                 position,

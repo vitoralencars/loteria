@@ -22,6 +22,7 @@ public class LoteriaActivity extends BaseActivity {
 
     private BottomNavigationView bnvMenu;
 
+    private Long idJogoEdicao = null;
     private int ultimoConcurso;
 
     @Override
@@ -68,5 +69,18 @@ public class LoteriaActivity extends BaseActivity {
 
     public List<Concurso> getConcursosSalvos(){
         return impl.onGetConcursosSalvos(loteria.getCodigoLoteria());
+    }
+
+    public void editarJogoSalvo(Long idJogo){
+        bnvMenu.setSelectedItemId(R.id.menu_cartela);
+        this.idJogoEdicao = idJogo;
+    }
+
+    public Long getIdJogoEdicao(){
+        return this.idJogoEdicao;
+    }
+
+    public void desativarEdicao(){
+        this.idJogoEdicao = null;
     }
 }

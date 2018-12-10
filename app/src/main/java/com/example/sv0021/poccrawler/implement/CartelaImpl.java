@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +38,6 @@ public class CartelaImpl implements CartelaPresenter {
             DezenaCartela dezena = new DezenaCartela();
             dezena.setDezena(i + 1);
             dezena.setSelecionado(false);
-            dezena.setCorBackground(cartela.getCorPadrao());
             dezenasCartela.add(dezena);
         }
 
@@ -66,12 +64,12 @@ public class CartelaImpl implements CartelaPresenter {
             List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
             for (int i = 0; i < qtdDezenas; i++) {
                 int index = random.nextInt(cartela.getDezenasDisponiveis().length);
-                dezenasSelecionadas.add(cartela.getDezenasCartela().get(cartela.getDezenasDisponiveis()[index] - 1));
+                dezenasSelecionadas.add(cartela.getDezenasCartela()
+                        .get(cartela.getDezenasDisponiveis()[index] - 1));
                 cartela.setDezenasDisponiveis(ArrayUtils.remove(cartela.getDezenasDisponiveis(), index));
             }
 
             cartela.setDezenasSelecionadas(dezenasSelecionadas);
-            cartela.setDezenasDisponiveis(cartela.getDezenasDisponiveis());
 
             fragment.atualizarTextoDezenasSelecionadas(cartela.getDezenasSelecionadas());
 
@@ -228,14 +226,62 @@ public class CartelaImpl implements CartelaPresenter {
                         new Concurso(proximoConcurso, jogosSalvos));
             }
 
-            String jsonConcursos = new Gson().toJson(concursosSalvos);
-
-            String key = LoteriasApplication.getPreferenceKey(context.getLoteria().getCodigoLoteria());
-
-            LoteriasApplication.savePreferences(key, jsonConcursos);
+            LoteriasApplication.salvarJogo(
+                    context.getLoteria().getCodigoLoteria(),
+                    new Gson().toJson(concursosSalvos)
+            );
 
             context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
             fragment.limparCartela();
         }
+    }
+
+    @Override
+    public void onMontarCartelaEdicao(LoteriaActivity context, Long idJogo, Spinner spQtdDezenas, CartelaFragment fragment, Cartela cartela) {
+
+        List<JogoSalvo> jogosSalvos = context.getConcursosSalvos().get(0).getJogosSalvos();
+
+        JogoSalvo jogoEdicao = null;
+        for(int i = 0; i < jogosSalvos.size(); i++){
+            if(jogosSalvos.get(i).getIdJogo().equals(idJogo)){
+                jogoEdicao = jogosSalvos.get(i);
+                break;
+            }
+        }
+
+        if(jogoEdicao != null) {
+            List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
+            for (int i = 0; i < jogoEdicao.getDezenas().size(); i++) {
+                DezenaCartela dezenaSelecionada = cartela.getDezenasCartela()
+                        .get(jogoEdicao.getDezenas().get(i) - 1);
+
+                dezenasSelecionadas.add(dezenaSelecionada);
+
+                cartela.setDezenasDisponiveis(ArrayUtils.removeElement(
+                        cartela.getDezenasDisponiveis(),
+                        dezenaSelecionada.getDezena())
+                );
+
+                DezenaCartela dezenaCartela = new DezenaCartela();
+                dezenaCartela.setDezena(jogoEdicao.getDezenas().get(i));
+                dezenaCartela.setSelecionado(true);
+
+                cartela.getDezenasCartela().set(jogoEdicao.getDezenas().get(i) - 1, dezenaCartela);
+            }
+
+            cartela.setQtdDesejadaDezenasSelecionadas(dezenasSelecionadas.size());
+            cartela.setDezenasSelecionadas(dezenasSelecionadas);
+
+            fragment.atualizarTextoDezenasSelecionadas(cartela.getDezenasSelecionadas());
+            fragment.getAdapter().notifyDataSetChanged();
+
+            for(int i = 0; i < spQtdDezenas.getAdapter().getCount(); i++){
+                if(Integer.parseInt(spQtdDezenas.getItemAtPosition(i).toString()) == dezenasSelecionadas.size()){
+                    spQtdDezenas.setSelection(i);
+                    break;
+                }
+            }
+        }
+
     }
 }

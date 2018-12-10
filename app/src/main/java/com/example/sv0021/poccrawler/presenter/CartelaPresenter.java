@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
+import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
@@ -60,6 +61,14 @@ public interface CartelaPresenter {
 
     void onSalvarJogo(
             LoteriaActivity context,
+            CartelaFragment fragment,
+            Cartela cartela
+    );
+
+    void onMontarCartelaEdicao(
+            LoteriaActivity context,
+            Long idJogo,
+            Spinner spQtdDezenas,
             CartelaFragment fragment,
             Cartela cartela
     );

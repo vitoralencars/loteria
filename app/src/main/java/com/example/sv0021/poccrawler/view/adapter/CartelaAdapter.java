@@ -13,17 +13,18 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
+import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
 import java.util.List;
 
 public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHolder>{
 
-    private Context context;
+    private LoteriaActivity context;
     private CartelaFragment fragment;
     private List<DezenaCartela> dezenas;
 
-    public CartelaAdapter(Context context, CartelaFragment fragment, List<DezenaCartela> dezenas){
+    public CartelaAdapter(LoteriaActivity context, CartelaFragment fragment, List<DezenaCartela> dezenas){
         this.context = context;
         this.fragment = fragment;
         this.dezenas = dezenas;
@@ -67,7 +68,7 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
                     context,
                     R.color.branco
             ));
-            background.setColor(Color.parseColor(dezena.getCorBackground()));
+            background.setColor(Color.parseColor(context.getLoteria().getCorPadrao()));
         }else{
             tvDezena.setTextColor(ContextCompat.getColor(
                     context,

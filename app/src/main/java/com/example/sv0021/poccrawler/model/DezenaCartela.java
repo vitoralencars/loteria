@@ -6,7 +6,6 @@ public class DezenaCartela implements Serializable {
 
     private int dezena;
     private boolean selecionado;
-    private String corBackground;
 
     public int getDezena() {
         return dezena;
@@ -22,13 +21,5 @@ public class DezenaCartela implements Serializable {
 
     public void setSelecionado(boolean selecionado) {
         this.selecionado = selecionado;
-    }
-
-    public String getCorBackground() {
-        return corBackground;
-    }
-
-    public void setCorBackground(String corBackGround) {
-        this.corBackground = corBackGround;
     }
 }

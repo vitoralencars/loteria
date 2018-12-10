@@ -53,6 +53,7 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
                 jogo.getDezenas()
         );
 
+        holder.ivEditar.setOnClickListener(view -> editarJogoSalvo(jogo));
         holder.ivRemover.setOnClickListener(view -> removerJogoSalvo(position));
 
         holder.rvDezenas.setAdapter(adapter);
@@ -63,8 +64,8 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         return concurso.getJogosSalvos().size();
     }
 
-    private void editarJogoSalvo(int position){
-
+    private void editarJogoSalvo(JogoSalvo jogo){
+        context.editarJogoSalvo(jogo.getIdJogo());
     }
 
     private void removerJogoSalvo(int position){
@@ -84,9 +85,10 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
             concursos.remove(index);
         }
 
-        String key = LoteriasApplication.getPreferenceKey(context.getLoteria().getCodigoLoteria());
-        String jsonConcursos = new Gson().toJson(concursos);
-        LoteriasApplication.savePreferences(key, jsonConcursos);
+        LoteriasApplication.salvarJogo(
+                context.getLoteria().getCodigoLoteria(),
+                new Gson().toJson(concursos)
+        );
 
         concursosAdapter.notifyDataSetChanged();
     }
