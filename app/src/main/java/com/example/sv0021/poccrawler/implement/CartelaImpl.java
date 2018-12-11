@@ -7,7 +7,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
-import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Cartela;
@@ -76,8 +75,6 @@ public class CartelaImpl implements CartelaPresenter {
             for (DezenaCartela dezena : cartela.getDezenasCartela()) {
                 if (dezenasSelecionadas.contains(dezena)) {
                     dezena.setSelecionado(true);
-                } else {
-                    dezena.setSelecionado(false);
                 }
             }
             fragment.getAdapter().notifyDataSetChanged();
@@ -128,7 +125,12 @@ public class CartelaImpl implements CartelaPresenter {
             }
         }else{
             cartela.setDezenasDisponiveis(ArrayUtils.add(cartela.getDezenasDisponiveis(), indexArray));
-            dezenasSelecionadas.remove(dezena);
+            for(DezenaCartela d : dezenasSelecionadas){
+                if(d.getDezena() == dezena.getDezena()){
+                    dezenasSelecionadas.remove(d);
+                    break;
+                }
+            }
         }
 
         cartela.setDezenasSelecionadas(dezenasSelecionadas);
@@ -194,6 +196,67 @@ public class CartelaImpl implements CartelaPresenter {
     @Override
     public void onSalvarJogo(LoteriaActivity context, CartelaFragment fragment, Cartela cartela) {
 
+        if(context.getIdJogoEdicao() != null){
+            salvarEdicao(context, fragment, cartela);
+        }else{
+            salvarJogo(context, fragment, cartela);
+        }
+
+    }
+
+    @Override
+    public void onMontarCartelaEdicao(LoteriaActivity context, Spinner spQtdDezenas, CartelaFragment fragment, Cartela cartela) {
+
+        Long idJogo = context.getIdJogoEdicao();
+
+        if(idJogo != null) {
+            JogoSalvo jogoEdicao = null;
+            List<JogoSalvo> jogosSalvos = context.getConcursosSalvos().get(0).getJogosSalvos();
+
+            for (int i = 0; i < jogosSalvos.size(); i++) {
+                if (jogosSalvos.get(i).getIdJogo().equals(idJogo)) {
+                    jogoEdicao = jogosSalvos.get(i);
+                }
+            }
+
+            if (jogoEdicao != null) {
+                List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
+                for (int i = 0; i < jogoEdicao.getDezenas().size(); i++) {
+                    DezenaCartela dezenaSelecionada = cartela.getDezenasCartela()
+                            .get(jogoEdicao.getDezenas().get(i) - 1);
+
+                    dezenasSelecionadas.add(dezenaSelecionada);
+
+                    cartela.setDezenasDisponiveis(ArrayUtils.removeElement(
+                            cartela.getDezenasDisponiveis(),
+                            dezenaSelecionada.getDezena())
+                    );
+
+                    DezenaCartela dezenaCartela = new DezenaCartela();
+                    dezenaCartela.setDezena(jogoEdicao.getDezenas().get(i));
+                    dezenaCartela.setSelecionado(true);
+
+                    cartela.getDezenasCartela().set(jogoEdicao.getDezenas().get(i) - 1, dezenaCartela);
+                }
+
+                cartela.setQtdDesejadaDezenasSelecionadas(dezenasSelecionadas.size());
+                cartela.setDezenasSelecionadas(dezenasSelecionadas);
+
+                fragment.atualizarTextoDezenasSelecionadas(cartela.getDezenasSelecionadas());
+                fragment.getAdapter().notifyDataSetChanged();
+
+                for (int i = 0; i < spQtdDezenas.getAdapter().getCount(); i++) {
+                    if (Integer.parseInt(spQtdDezenas.getItemAtPosition(i).toString()) == dezenasSelecionadas.size()) {
+                        spQtdDezenas.setSelection(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void salvarJogo(LoteriaActivity context, CartelaFragment fragment, Cartela cartela){
         if(cartela.getDezenasSelecionadas().size() < cartela.getQtdDesejadaDezenasSelecionadas()){
             context.exibirToast(
                     context,
@@ -226,62 +289,40 @@ public class CartelaImpl implements CartelaPresenter {
                         new Concurso(proximoConcurso, jogosSalvos));
             }
 
-            LoteriasApplication.salvarJogo(
-                    context.getLoteria().getCodigoLoteria(),
-                    new Gson().toJson(concursosSalvos)
-            );
+            context.salvarJogo(new Gson().toJson(concursosSalvos));
 
             context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
             fragment.limparCartela();
         }
     }
 
-    @Override
-    public void onMontarCartelaEdicao(LoteriaActivity context, Long idJogo, Spinner spQtdDezenas, CartelaFragment fragment, Cartela cartela) {
+    private void salvarEdicao(LoteriaActivity context, CartelaFragment fragment, Cartela cartela){
+        Long idJogo = context.getIdJogoEdicao();
 
-        List<JogoSalvo> jogosSalvos = context.getConcursosSalvos().get(0).getJogosSalvos();
+        if(idJogo != null) {
+            int indexJogoArray = -1;
+            List<JogoSalvo> jogosSalvos = context.getConcursosSalvos().get(0).getJogosSalvos();
 
-        JogoSalvo jogoEdicao = null;
-        for(int i = 0; i < jogosSalvos.size(); i++){
-            if(jogosSalvos.get(i).getIdJogo().equals(idJogo)){
-                jogoEdicao = jogosSalvos.get(i);
-                break;
-            }
-        }
-
-        if(jogoEdicao != null) {
-            List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
-            for (int i = 0; i < jogoEdicao.getDezenas().size(); i++) {
-                DezenaCartela dezenaSelecionada = cartela.getDezenasCartela()
-                        .get(jogoEdicao.getDezenas().get(i) - 1);
-
-                dezenasSelecionadas.add(dezenaSelecionada);
-
-                cartela.setDezenasDisponiveis(ArrayUtils.removeElement(
-                        cartela.getDezenasDisponiveis(),
-                        dezenaSelecionada.getDezena())
-                );
-
-                DezenaCartela dezenaCartela = new DezenaCartela();
-                dezenaCartela.setDezena(jogoEdicao.getDezenas().get(i));
-                dezenaCartela.setSelecionado(true);
-
-                cartela.getDezenasCartela().set(jogoEdicao.getDezenas().get(i) - 1, dezenaCartela);
-            }
-
-            cartela.setQtdDesejadaDezenasSelecionadas(dezenasSelecionadas.size());
-            cartela.setDezenasSelecionadas(dezenasSelecionadas);
-
-            fragment.atualizarTextoDezenasSelecionadas(cartela.getDezenasSelecionadas());
-            fragment.getAdapter().notifyDataSetChanged();
-
-            for(int i = 0; i < spQtdDezenas.getAdapter().getCount(); i++){
-                if(Integer.parseInt(spQtdDezenas.getItemAtPosition(i).toString()) == dezenasSelecionadas.size()){
-                    spQtdDezenas.setSelection(i);
-                    break;
+            for (int i = 0; i < jogosSalvos.size(); i++) {
+                if (jogosSalvos.get(i).getIdJogo().equals(idJogo)) {
+                    indexJogoArray = i;
                 }
             }
-        }
 
+            List<Integer> dezenas = new ArrayList<>();
+            for (DezenaCartela dezena : cartela.getDezenasSelecionadas()) {
+                dezenas.add(dezena.getDezena());
+            }
+
+            List<Concurso> concursosSalvos = context.getConcursosSalvos();
+            concursosSalvos.get(0).getJogosSalvos().set(indexJogoArray, new JogoSalvo(idJogo, dezenas));
+            context.salvarJogo(new Gson().toJson(concursosSalvos));
+
+            context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_alterado));
+            fragment.limparCartela();
+
+            context.desativarEdicao();
+        }
     }
+
 }

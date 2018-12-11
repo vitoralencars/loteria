@@ -62,6 +62,12 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        activity.desativarEdicao();
+    }
+
     private void initView(View v){
         tvDezenasSelecionadas = v.findViewById(R.id.tvDezenasSelecionadas);
         rvDezenas = v.findViewById(R.id.rvDezenas);
@@ -152,8 +158,12 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
 
     private void verificarEdicaoJogo(){
         if(activity.getIdJogoEdicao() != null){
-            impl.onMontarCartelaEdicao(activity, activity.getIdJogoEdicao(), spQtdDezenas,this, cartela);
-            activity.desativarEdicao();
+            impl.onMontarCartelaEdicao(
+                    activity,
+                    spQtdDezenas,
+                    this,
+                    cartela
+            );
         }
     }
 

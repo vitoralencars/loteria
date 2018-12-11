@@ -67,7 +67,6 @@ public interface CartelaPresenter {
 
     void onMontarCartelaEdicao(
             LoteriaActivity context,
-            Long idJogo,
             Spinner spQtdDezenas,
             CartelaFragment fragment,
             Cartela cartela

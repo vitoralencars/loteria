@@ -7,6 +7,7 @@ public class Concurso implements Serializable {
 
     private int numConcurso;
     private List<JogoSalvo> jogosSalvos;
+    private int[] resultadoSorteio;
 
     public Concurso(int numConcurso, List<JogoSalvo> jogosSalvos) {
         this.numConcurso = numConcurso;
@@ -19,5 +20,13 @@ public class Concurso implements Serializable {
 
     public List<JogoSalvo> getJogosSalvos() {
         return jogosSalvos;
+    }
+
+    public int[] getResultadoSorteio() {
+        return resultadoSorteio;
+    }
+
+    public void setResultadoSorteio(int[] resultadoSorteio) {
+        this.resultadoSorteio = resultadoSorteio;
     }
 }

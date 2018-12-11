@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
-import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
@@ -45,7 +44,13 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         JogoSalvo jogo = concurso.getJogosSalvos().get(position);
 
         boolean concursoRealizado = concurso.getNumConcurso() <= context.getUltimoConcurso();
-        holder.llEdicaoRemocao.setVisibility(concursoRealizado ? View.GONE : View.VISIBLE);
+        if(concursoRealizado){
+            holder.llEdicaoRemocao.setVisibility(View.GONE);
+            holder.tvAcertos.setVisibility(View.VISIBLE);
+        }else{
+            holder.llEdicaoRemocao.setVisibility(View.VISIBLE);
+            holder.tvAcertos.setVisibility(View.GONE);
+        }
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
@@ -57,6 +62,7 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         holder.ivRemover.setOnClickListener(view -> removerJogoSalvo(position));
 
         holder.rvDezenas.setAdapter(adapter);
+
     }
 
     @Override
@@ -85,10 +91,7 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
             concursos.remove(index);
         }
 
-        LoteriasApplication.salvarJogo(
-                context.getLoteria().getCodigoLoteria(),
-                new Gson().toJson(concursos)
-        );
+        context.salvarJogo(new Gson().toJson(concursos));
 
         concursosAdapter.notifyDataSetChanged();
     }

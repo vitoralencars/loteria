@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.view.View;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.implement.LoteriaImpl;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
@@ -82,5 +83,12 @@ public class LoteriaActivity extends BaseActivity {
 
     public void desativarEdicao(){
         this.idJogoEdicao = null;
+    }
+
+    public void salvarJogo(String json){
+            LoteriasApplication.savePreferences(
+                    LoteriasApplication.getPreferenceKey(loteria.getCodigoLoteria()),
+                    json
+            );
     }
 }

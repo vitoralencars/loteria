@@ -3,15 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="@dimen/padding_tiny"
-    android:paddingStart="@dimen/padding_small"
-    android:paddingEnd="@dimen/padding_small"
-    android:paddingBottom="@dimen/padding_small"
+    android:layout_marginTop="@dimen/margin_border"
     android:background="@color/branco"
     android:orientation="vertical">
 
     <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
-        android:layout_marginTop="@dimen/margin_border">
+        android:paddingStart="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvDezenas"
@@ -58,8 +56,12 @@
             android:textAlignment="center"
             android:textColor="@color/cinza"
             android:textSize="@dimen/font_small"
-            android:visibility="gone"/>
+            android:text="0\nAcertos"
+            android:visibility="visible"/>
 
     </LinearLayout>
+
+    <View style="@style/ViewSeparator"
+        android:layout_marginTop="@dimen/margin_normal"/>
 
 </LinearLayout>

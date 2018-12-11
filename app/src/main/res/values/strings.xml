@@ -16,6 +16,10 @@
 
     <!--CARTELA-->
     <string name="cartela_jogo_salvo">Jogo salvo com sucesso!</string>
+    <string name="cartela_jogo_alterado">Jogo alterado com sucesso!</string>
+
+    <!--JOGOS SALVOS-->
+    <string name="jogos_salvos_conferir">Conferir</string>
 
     <!--ERROS-->
     <string name="erro_qtd_maxima_dezenas_selecionadas">Você já selecionou o número máximo de dezenas para esta cartela.</string>

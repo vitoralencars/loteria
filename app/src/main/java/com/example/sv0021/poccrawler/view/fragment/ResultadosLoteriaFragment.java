@@ -95,7 +95,7 @@ public class ResultadosLoteriaFragment extends Fragment {
         );
 
         impl.onSetDataProximoSorteio(
-                activity.getLoteria().getDataSorteio(),
+                activity.getLoteria().getProximoSorteio(),
                 tvDataProximoSorteio
         );
 
