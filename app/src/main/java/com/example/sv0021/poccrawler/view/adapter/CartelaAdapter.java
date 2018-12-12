@@ -68,16 +68,9 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
                     context,
                     R.color.branco
             ));
-            background.setColor(Color.parseColor(context.getLoteria().getCorPadrao()));
+            background.setAlpha(127);
         }else{
-            tvDezena.setTextColor(ContextCompat.getColor(
-                    context,
-                    R.color.preto
-            ));
-            background.setColor(ContextCompat.getColor(
-                    context,
-                    R.color.cinza
-            ));
+            background.setAlpha(255);
         }
     }
 

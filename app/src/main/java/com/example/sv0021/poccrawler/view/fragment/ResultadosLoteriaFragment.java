@@ -26,7 +26,7 @@ public class ResultadosLoteriaFragment extends Fragment {
     private TextView tvNomeLoteria, tvGanhadores, tvValorEstimado, tvDataProximoSorteio, tvConcurso;
     private View viewTraco;
     private ImageView ivIconeLoteria, ivAnterior, ivProximo;
-    private RecyclerView rvDezenas, rvResultados;
+    private RecyclerView rvDezenas, rvResultados, rvCidades;
 
     private ResultadosLoteriaImpl impl = new ResultadosLoteriaImpl();
 
@@ -65,6 +65,7 @@ public class ResultadosLoteriaFragment extends Fragment {
         ivProximo = v.findViewById(R.id.ivProximo);
         rvDezenas = v.findViewById(R.id.rvDezenas);
         rvResultados = v.findViewById(R.id.rvResultados);
+        rvCidades = v.findViewById(R.id.rvCidades);
     }
 
     private void initEvents(){
@@ -130,6 +131,7 @@ public class ResultadosLoteriaFragment extends Fragment {
                 activity,
                 tvGanhadores,
                 tvValorEstimado,
+                rvCidades,
                 rvDezenas
         );
 

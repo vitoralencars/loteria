@@ -17,6 +17,7 @@ public interface JogosSalvosPresenter {
     void onConferirResultados(
             LoteriaActivity context,
             int codConcurso,
+            int index,
             ConcursosAdapter adapter,
             ProgressBar progressBar
     );

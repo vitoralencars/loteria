@@ -286,7 +286,7 @@ public class CartelaImpl implements CartelaPresenter {
                 jogosSalvos.add(new JogoSalvo(System.currentTimeMillis(), dezenas));
 
                 concursosSalvos.add(
-                        new Concurso(proximoConcurso, jogosSalvos));
+                        new Concurso(proximoConcurso, jogosSalvos, context.getLoteria().getProximoSorteio()));
             }
 
             context.salvarJogo(new Gson().toJson(concursosSalvos));

@@ -47,17 +47,14 @@
 
         </LinearLayout>
 
-        <TextView
+        <TextView style="@style/TextoCentralizado"
             android:id="@+id/tvAcertos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:layout_gravity="center_vertical"
-            android:textAlignment="center"
             android:textColor="@color/cinza"
             android:textSize="@dimen/font_small"
             android:text="0\nAcertos"
-            android:visibility="visible"/>
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

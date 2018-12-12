@@ -99,7 +99,7 @@
 
                 <LinearLayout style="@style/SimpleLinearLayoutVertical"
                     android:id="@+id/llResultadosGerais"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView style="@style/TextoCentralizado"
                         android:text="@string/ultimos_concursos_premio_maximo"
@@ -114,12 +114,21 @@
                         android:textStyle="bold"/>
 
                     <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvCidades"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+                    <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvDezenas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:nestedScrollingEnabled="false"
-                        android:layout_marginTop="@dimen/margin_border"/>
+                        android:layout_marginTop="@dimen/margin_small"/>
 
                     <LinearLayout style="@style/SimpleLinearLayoutVertical"
                         android:id="@+id/llValorEstimado">

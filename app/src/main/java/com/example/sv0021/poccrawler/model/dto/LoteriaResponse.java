@@ -28,6 +28,10 @@ public class LoteriaResponse implements Serializable {
     private List<Integer> dezenas;
     @SerializedName("Ganhadores")
     private List<Integer> ganhadores;
+    @SerializedName("Cidades")
+    private List<String> cidades;
+    @SerializedName("Estados")
+    private List<String> estados;
     @SerializedName("Rateio")
     private List<Double> rateio;
     @SerializedName("ValorAcumulado")
@@ -75,6 +79,14 @@ public class LoteriaResponse implements Serializable {
 
     public List<Integer> getGanhadores() {
         return ganhadores;
+    }
+
+    public List<String> getCidades() {
+        return cidades;
+    }
+
+    public List<String> getEstados() {
+        return estados;
     }
 
     public List<Double> getRateio() {

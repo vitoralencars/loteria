@@ -21,7 +21,7 @@ public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHold
     private String corPadrao;
     private List<Integer> dezenas;
 
-    public DezenasAdapter(Context context, String corPadrao, List<Integer> dezenas) {
+    public  DezenasAdapter(Context context, String corPadrao, List<Integer> dezenas) {
         this.context = context;
         this.corPadrao = corPadrao;
         this.dezenas = dezenas;

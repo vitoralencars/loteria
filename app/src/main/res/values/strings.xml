@@ -20,6 +20,8 @@
 
     <!--JOGOS SALVOS-->
     <string name="jogos_salvos_conferir">Conferir</string>
+    <string name="jogos_salvos_resultado">Resultado</string>
+    <string name="jogos_salvos_seus_jogos">Seus Jogos</string>
 
     <!--ERROS-->
     <string name="erro_qtd_maxima_dezenas_selecionadas">Você já selecionou o número máximo de dezenas para esta cartela.</string>

@@ -46,7 +46,9 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         boolean concursoRealizado = concurso.getNumConcurso() <= context.getUltimoConcurso();
         if(concursoRealizado){
             holder.llEdicaoRemocao.setVisibility(View.GONE);
-            holder.tvAcertos.setVisibility(View.VISIBLE);
+            if(concurso.getResultadoSorteio() != null){
+                exibirResultados(holder.tvAcertos, jogo);
+            }
         }else{
             holder.llEdicaoRemocao.setVisibility(View.VISIBLE);
             holder.tvAcertos.setVisibility(View.GONE);
@@ -94,6 +96,21 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         context.salvarJogo(new Gson().toJson(concursos));
 
         concursosAdapter.notifyDataSetChanged();
+    }
+
+    private void exibirResultados(TextView tvAcertos, JogoSalvo jogo){
+        int cont = 0;
+        for(int i = 0; i < jogo.getDezenas().size(); i++){
+            for(int j = 0; j < concurso.getResultadoSorteio().length; j++){
+                if(jogo.getDezenas().get(i) == concurso.getResultadoSorteio()[j]){
+                    cont++;
+                }
+            }
+        }
+
+        String acertos = cont == 1 ? "\n Acerto" : "\n Acertos";
+        tvAcertos.setText(cont + acertos);
+        tvAcertos.setVisibility(View.VISIBLE);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

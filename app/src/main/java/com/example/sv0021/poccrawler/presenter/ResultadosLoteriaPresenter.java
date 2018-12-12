@@ -49,6 +49,7 @@ public interface ResultadosLoteriaPresenter {
             LoteriaActivity context,
             TextView tvGanhadores,
             TextView tvValorEstimado,
+            RecyclerView rvCidades,
             RecyclerView rvDezenas
     );
 

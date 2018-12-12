@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView style="@style/TextoCentralizado"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvCidade"
+    android:textStyle="bold"
+    android:textSize="@dimen/font_normal"
+    android:textColor="@color/preto"/>

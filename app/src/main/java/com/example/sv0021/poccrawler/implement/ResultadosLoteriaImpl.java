@@ -20,6 +20,7 @@ import com.example.sv0021.poccrawler.retrofit.Service;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.ProgressBarControl;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
+import com.example.sv0021.poccrawler.view.adapter.CidadesAdapter;
 import com.example.sv0021.poccrawler.view.adapter.DezenasAdapter;
 import com.example.sv0021.poccrawler.view.adapter.ResultadoLoteriaAdapter;
 import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
@@ -98,7 +99,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvDezenas) {
+    public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvCidades, RecyclerView rvDezenas) {
 
         tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(context.getLoteria().getEstimativaPremio()));
 
@@ -121,6 +122,14 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                                 R.string.ultimos_concursos_multiplos_ganhadores,
                                 Integer.toString(numGanhadores)));
                 break;
+        }
+
+        if(numGanhadores > 0){
+            CidadesAdapter adapter = new CidadesAdapter(context);
+            rvCidades.setAdapter(adapter);
+            rvCidades.setVisibility(View.VISIBLE);
+        }else{
+            rvCidades.setVisibility(View.GONE);
         }
 
         DezenasAdapter adapter = new DezenasAdapter(
