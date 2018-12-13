@@ -54,6 +54,9 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 break;
             case TipoLoteria.LOTOMANIA:
                 ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotomania));
+
+            case TipoLoteria.TIMEMANIA:
+                ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
         }
     }
@@ -99,8 +102,9 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvCidades, RecyclerView rvDezenas) {
+    public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvDataSorteio, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvCidades, RecyclerView rvDezenas) {
 
+        tvDataSorteio.setText(getDataFormatada(context.getLoteria().getDataSorteio()));
         tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(context.getLoteria().getEstimativaPremio()));
 
         int numGanhadores = context.getLoteria().getGanhadores().get(0);
@@ -134,7 +138,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
-                context.getLoteria().getCorPadrao(),
+                context.getLoteria(),
                 context.getLoteria().getDezenas()
         );
 
@@ -183,7 +187,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void onSetDataProximoSorteio(Date data, TextView tvData) {
+    public void onSetDatas(Date data, TextView tvData) {
         tvData.setText(getDataFormatada(data));
     }
 

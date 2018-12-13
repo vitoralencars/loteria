@@ -3,6 +3,7 @@ package com.example.sv0021.poccrawler.view.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_cartela, container, false);
@@ -56,6 +57,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         initView(view);
         montarCartela();
         initSpinner();
+        configurarBotoes();
         initEvents();
         verificarEdicaoJogo();
 
@@ -153,6 +155,17 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         impl.onExibirDezenasSelecionadas(
                 tvDezenasSelecionadas,
                 dezenasSelecionadas
+        );
+    }
+
+    private void configurarBotoes(){
+        impl.onConfigurarBotoes(
+                activity,
+                this,
+                cartela,
+                btnCompletar,
+                btnSalvar,
+                btnLimpar
         );
     }
 

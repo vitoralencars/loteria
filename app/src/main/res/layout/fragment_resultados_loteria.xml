@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     android:background="@color/cinza_claro">
 
-    <LinearLayout style="@style/SimpleLinearLayoutVertical"
-        android:padding="@dimen/padding_normal">
+    <LinearLayout style="@style/SimpleLinearLayoutVertical">
 
         <LinearLayout style="@style/SimpleLinearLayoutVertical"
             android:background="@color/branco"
+            android:layout_margin="@dimen/margin_normal"
             android:elevation="4dp">
 
             <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
@@ -75,31 +75,26 @@
 
                 </RelativeLayout>
 
-                <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="@dimen/margin_border"
-                    android:layout_gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/preto"
-                        android:text="@string/ultimos_concursos_proximo_sorteio"/>
-
-                    <TextView
-                        android:id="@+id/tvDataProximoSorteio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
-                        android:textColor="@color/preto"
-                        android:textStyle="bold"
-                        android:text="20/11/2018"/>
-
-                </LinearLayout>
-
                 <LinearLayout style="@style/SimpleLinearLayoutVertical"
                     android:id="@+id/llResultadosGerais"
                     android:visibility="visible">
+
+                    <LinearLayout style="@style/SimpleLinearLayoutVertical"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView style="@style/TextoCentralizado"
+                            android:textColor="@color/preto"
+                            android:text="@string/ultimos_concursos_data_sorteio"/>
+
+                        <TextView style="@style/TextoCentralizado"
+                            android:id="@+id/tvDataSorteioConcurso"
+                            android:textColor="@color/preto"
+                            android:textStyle="bold"
+                            android:text="20/11/2018"/>
+
+                    </LinearLayout>
 
                     <TextView style="@style/TextoCentralizado"
                         android:text="@string/ultimos_concursos_premio_maximo"
@@ -148,6 +143,28 @@
 
                 </LinearLayout>
 
+                <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/margin_border"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/preto"
+                        android:text="@string/ultimos_concursos_proximo_sorteio"/>
+
+                    <TextView
+                        android:id="@+id/tvDataProximoSorteio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:textColor="@color/preto"
+                        android:textStyle="bold"
+                        android:text="20/11/2018"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -155,8 +172,9 @@
         <LinearLayout style="@style/SimpleLinearLayoutVertical"
             android:id="@+id/llResultadosDetalhados"
             android:padding="@dimen/padding_normal"
-            android:layout_marginTop="@dimen/margin_border"
-            android:layout_marginBottom="@dimen/margin_tiny"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:background="@color/branco"
             android:elevation="4dp"
             android:visibility="gone">
@@ -168,7 +186,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/font_large"
                 android:textColor="@color/preto"
-                android:text="Resultado Detalhado"/>
+                android:text="@string/ultimos_concursos_resultado_detalhado"/>
 
             <View
                 android:layout_width="match_parent"

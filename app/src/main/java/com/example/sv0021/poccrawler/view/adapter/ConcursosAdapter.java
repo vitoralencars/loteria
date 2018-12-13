@@ -16,11 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.implement.JogosSalvosImpl;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.DataUtils;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
 
     public ConcursosAdapter(LoteriaActivity context) {
         this.context = context;
-        concursos = context.getConcursosSalvos();
+        this.concursos = context.getConcursosSalvos();
     }
 
     @NonNull
@@ -62,7 +64,12 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
         JogosSalvosAdapter jogosAdapter = new JogosSalvosAdapter(context, concurso, this);
         holder.rvJogosSalvos.setAdapter(jogosAdapter);
 
-        holder.btnConferir.setOnClickListener(view -> conferirResultados(holder, position));
+        if(concurso.getResultadoSorteio() != null && concurso.getResultadoSorteio().length > 0) {
+            holder.btnConferir.setVisibility(View.GONE);
+        }else{
+            holder.btnConferir.setVisibility(View.VISIBLE);
+            holder.btnConferir.setOnClickListener(view -> conferirResultados(holder, position));
+        }
 
         if(concurso.getResultadoSorteio() != null){
             exibirResultadoFinal(holder, concurso);
@@ -75,6 +82,11 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
     @Override
     public int getItemCount() {
         return concursos.size();
+    }
+
+    void atualizarConcursos(){
+        this.concursos = context.getConcursosSalvos();
+        notifyDataSetChanged();
     }
 
     private void customizarProgressBar(ProgressBar progressBar){
@@ -106,6 +118,8 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
 
         concursos.get(posConcurso).setResultadoSorteio(resultadoLoteria);
 
+        context.salvarJogo(new Gson().toJson(concursos));
+
         notifyDataSetChanged();
     }
 
@@ -117,7 +131,7 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
-                context.getLoteria().getCorPadrao(),
+                context.getLoteria(),
                 resultado
         );
 

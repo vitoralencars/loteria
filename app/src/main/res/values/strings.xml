@@ -4,10 +4,12 @@
     <!--ÚLTIMOS CONCURSOS-->
     <string name="ultimos_concursos_premio_maximo">Prêmio máximo:</string>
     <string name="ultimos_concursos_estimativa">Prêmio estimado para o próximo concurso:</string>
+    <string name="ultimos_concursos_data_sorteio">Data do sorteio:</string>
     <string name="ultimos_concursos_proximo_sorteio">Próximo sorteio:</string>
     <string name="ultimos_concursos_acumulou">Acumulou!</string>
     <string name="ultimos_concursos_um_ganhador">1 ganhador!</string>
     <string name="ultimos_concursos_multiplos_ganhadores">%s ganhadores!</string>
+    <string name="ultimos_concursos_resultado_detalhado">Resultado Detalhado</string>
 
     <!--SORTEIO DETALHADO-->
     <string name="detalhe_sorteio_qtd_ganhadores">Total de ganhadores:</string>
@@ -22,6 +24,8 @@
     <string name="jogos_salvos_conferir">Conferir</string>
     <string name="jogos_salvos_resultado">Resultado</string>
     <string name="jogos_salvos_seus_jogos">Seus Jogos</string>
+    <string name="jogos_salvos_mensagem_remover">Tem certeza que deseja remover este jogo de sua lista?</string>
+    <string name="jogos_salvos_nenhum_salvo">Você não possui nenhum jogo salvo para esta loteria.</string>
 
     <!--ERROS-->
     <string name="erro_qtd_maxima_dezenas_selecionadas">Você já selecionou o número máximo de dezenas para esta cartela.</string>

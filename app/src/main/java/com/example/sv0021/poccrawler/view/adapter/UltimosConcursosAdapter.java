@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
@@ -67,21 +68,25 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
 
     private void setCaracteristicasLoteria(ViewHolder holder, LoteriaResponse loteria){
         switch (loteria.getCodigoLoteria()){
-            case 1:
+            case TipoLoteria.MEGA_SENA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
-            case 2:
+            case TipoLoteria.LOTOFACIL:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotofacil));
                 break;
-            case 3:
+            case TipoLoteria.QUINA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_quina));
                 break;
-            case 4:
+            case TipoLoteria.LOTOMANIA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotomania));
+                break;
+            case TipoLoteria.TIMEMANIA:
+                pintarCampos(holder, loteria.getCorPadrao());
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
         }
     }
@@ -118,7 +123,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
-                loteria.getCorPadrao(),
+                loteria,
                 loteria.getDezenas()
         );
 

@@ -23,7 +23,8 @@ public class ResultadosLoteriaFragment extends Fragment {
     private LoteriaActivity activity;
 
     private LinearLayout llResultadosGerais, llResultadosDetalhados, llValorEstimado;
-    private TextView tvNomeLoteria, tvGanhadores, tvValorEstimado, tvDataProximoSorteio, tvConcurso;
+    private TextView tvNomeLoteria, tvDataSorteioConcurso, tvGanhadores, tvValorEstimado,
+            tvDataProximoSorteio, tvConcurso;
     private View viewTraco;
     private ImageView ivIconeLoteria, ivAnterior, ivProximo;
     private RecyclerView rvDezenas, rvResultados, rvCidades;
@@ -55,6 +56,7 @@ public class ResultadosLoteriaFragment extends Fragment {
         llResultadosDetalhados = v.findViewById(R.id.llResultadosDetalhados);
         llValorEstimado = v.findViewById(R.id.llValorEstimado);
         tvNomeLoteria = v.findViewById(R.id.tvNomeLoteria);
+        tvDataSorteioConcurso = v.findViewById(R.id.tvDataSorteioConcurso);
         tvGanhadores = v.findViewById(R.id.tvGanhadores);
         tvValorEstimado = v.findViewById(R.id.tvValorEstimado);
         tvDataProximoSorteio = v.findViewById(R.id.tvDataProximoSorteio);
@@ -95,7 +97,7 @@ public class ResultadosLoteriaFragment extends Fragment {
                 ivProximo
         );
 
-        impl.onSetDataProximoSorteio(
+        impl.onSetDatas(
                 activity.getLoteria().getProximoSorteio(),
                 tvDataProximoSorteio
         );
@@ -129,6 +131,7 @@ public class ResultadosLoteriaFragment extends Fragment {
 
         impl.onExibirResultadoPrincipal(
                 activity,
+                tvDataSorteioConcurso,
                 tvGanhadores,
                 tvValorEstimado,
                 rvCidades,

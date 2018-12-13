@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.JogosSalvosImpl;
@@ -19,6 +21,7 @@ public class JogosSalvosFragment extends Fragment {
 
     private LoteriaActivity activity;
     private RecyclerView rvConcursos;
+    private TextView tvNenhumSalvo;
 
     private JogosSalvosImpl impl = new JogosSalvosImpl();
 
@@ -40,10 +43,15 @@ public class JogosSalvosFragment extends Fragment {
 
     private void initView(View v){
         rvConcursos = v.findViewById(R.id.rvConcursos);
+        tvNenhumSalvo = v.findViewById(R.id.tvNenhumSalvo);
     }
 
     private void listarConcursosSalvos(){
-        impl.onListarConcursos(activity, rvConcursos);
+        impl.onListarConcursos(
+                activity,
+                rvConcursos,
+                tvNenhumSalvo
+        );
     }
 
 }

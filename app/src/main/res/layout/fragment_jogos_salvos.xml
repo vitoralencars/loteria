@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cinza_claro">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvConcursos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+    <TextView style="@style/TextoCentralizado"
+        android:id="@+id/tvNenhumSalvo"
+        android:layout_centerInParent="true"
+        android:text="@string/jogos_salvos_nenhum_salvo"
+        android:visibility="gone"/>
 
-</android.support.v4.widget.NestedScrollView>
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/rlNenhumSalvo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvConcursos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

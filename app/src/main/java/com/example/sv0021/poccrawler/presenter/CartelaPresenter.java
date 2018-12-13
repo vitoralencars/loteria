@@ -1,12 +1,14 @@
 package com.example.sv0021.poccrawler.presenter;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
@@ -70,5 +72,14 @@ public interface CartelaPresenter {
             Spinner spQtdDezenas,
             CartelaFragment fragment,
             Cartela cartela
+    );
+
+    void onConfigurarBotoes(
+            LoteriaActivity context,
+            CartelaFragment fragment,
+            Cartela cartela,
+            Button btnCompletar,
+            Button btnSalvar,
+            Button btnLimpar
     );
 }

@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,12 +20,12 @@ import java.util.List;
 public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHolder>{
 
     private Context context;
-    private String corPadrao;
+    private LoteriaResponse loteria;
     private List<Integer> dezenas;
 
-    public  DezenasAdapter(Context context, String corPadrao, List<Integer> dezenas) {
+    public  DezenasAdapter(Context context, LoteriaResponse loteria, List<Integer> dezenas) {
         this.context = context;
-        this.corPadrao = corPadrao;
+        this.loteria = loteria;
         this.dezenas = dezenas;
 
         Collections.sort(this.dezenas);
@@ -48,8 +50,17 @@ public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHold
             valor = Character.toString(valor.charAt(1)) + Character.toString(valor.charAt(2));
         }
 
+        String corDezena, corBackground;
+        if(loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA){
+            corDezena = loteria.getCorSecundaria();
+            corBackground = loteria.getCorPadrao();
+        }else{
+            corDezena = loteria.getCorPadrao();
+            corBackground = loteria.getCorSecundaria();
+        }
+        holder.tvDezena.setTextColor(Color.parseColor(corDezena));
         holder.tvDezena.setText(valor);
-        setBackground(holder);
+        setBackground(holder, corBackground);
 
     }
 
@@ -58,9 +69,9 @@ public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHold
         return dezenas.size();
     }
 
-    private void setBackground(ViewHolder holder){
+    private void setBackground(ViewHolder holder, String corBackground){
         GradientDrawable background = (GradientDrawable)holder.tvDezena.getBackground();
-        background.setColor(Color.parseColor(corPadrao));
+        background.setColor(Color.parseColor(corBackground));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

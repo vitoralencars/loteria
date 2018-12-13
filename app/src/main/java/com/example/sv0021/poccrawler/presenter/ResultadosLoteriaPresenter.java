@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
 
@@ -47,6 +48,7 @@ public interface ResultadosLoteriaPresenter {
 
     void onExibirResultadoPrincipal(
             LoteriaActivity context,
+            TextView tvDataSorteio,
             TextView tvGanhadores,
             TextView tvValorEstimado,
             RecyclerView rvCidades,
@@ -58,7 +60,7 @@ public interface ResultadosLoteriaPresenter {
             RecyclerView rvResultados
     );
 
-    void onSetDataProximoSorteio(
+    void onSetDatas(
             Date data,
             TextView tvData
     );

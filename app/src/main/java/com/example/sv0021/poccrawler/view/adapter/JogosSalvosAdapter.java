@@ -1,5 +1,6 @@
 package com.example.sv0021.poccrawler.view.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
@@ -56,12 +58,12 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
-                context.getLoteria().getCorPadrao(),
+                context.getLoteria(),
                 jogo.getDezenas()
         );
 
         holder.ivEditar.setOnClickListener(view -> editarJogoSalvo(jogo));
-        holder.ivRemover.setOnClickListener(view -> removerJogoSalvo(position));
+        holder.ivRemover.setOnClickListener(view -> exibirAlertaRemoverJogo(position));
 
         holder.rvDezenas.setAdapter(adapter);
 
@@ -95,7 +97,7 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
 
         context.salvarJogo(new Gson().toJson(concursos));
 
-        concursosAdapter.notifyDataSetChanged();
+        concursosAdapter.atualizarConcursos();
     }
 
     private void exibirResultados(TextView tvAcertos, JogoSalvo jogo){
@@ -111,6 +113,36 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
         String acertos = cont == 1 ? "\n Acerto" : "\n Acertos";
         tvAcertos.setText(cont + acertos);
         tvAcertos.setVisibility(View.VISIBLE);
+    }
+
+    private void exibirAlertaRemoverJogo(int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        LayoutInflater inflater = context.getLayoutInflater();
+        View v = inflater.inflate(R.layout.alerta_remover_jogo_salvo, null);
+        builder.setView(v);
+
+        RecyclerView rvDezenas = v.findViewById(R.id.rvDezenas);
+        RelativeLayout rlNao = v.findViewById(R.id.rlNao);
+        RelativeLayout rlSim = v.findViewById(R.id.rlSim);
+
+        DezenasAdapter adapter = new DezenasAdapter(
+                context,
+                context.getLoteria(),
+                concurso.getJogosSalvos().get(position).getDezenas()
+        );
+
+        rvDezenas.setAdapter(adapter);
+
+        AlertDialog dialog = builder.create();
+
+        rlNao.setOnClickListener(view -> dialog.dismiss());
+        rlSim.setOnClickListener(view -> {
+            removerJogoSalvo(position);
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

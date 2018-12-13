@@ -14,6 +14,8 @@ public class LoteriaResponse implements Serializable {
     private String nomeLoteria;
     @SerializedName("CorPadrao")
     private String corPadrao;
+    @SerializedName("CorSecundaria")
+    private String corSecundaria;
     @SerializedName("QtdMinimaDezenasAposta")
     private int qtdMinimaDezenasAposta;
     @SerializedName("QtdMaximaDezenasAposta")
@@ -51,6 +53,10 @@ public class LoteriaResponse implements Serializable {
 
     public String getCorPadrao() {
         return corPadrao;
+    }
+
+    public String getCorSecundaria() {
+        return corSecundaria;
     }
 
     public int getQtdMinimaDezenasAposta() {

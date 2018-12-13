@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
@@ -51,8 +53,16 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
             dezenaCartela = Character.toString(dezenaCartela.charAt(1)) + Character.toString(dezenaCartela.charAt(2));
         }
 
+        String corDezena;
+        LoteriaResponse loteria = context.getLoteria();
+        if(loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA){
+            corDezena = loteria.getCorSecundaria();
+        }else{
+            corDezena = loteria.getCorPadrao();
+        }
+        holder.tvDezena.setTextColor(Color.parseColor(corDezena));
         holder.tvDezena.setText(dezenaCartela);
-        atualizarBackground(dezena, holder.tvDezena);
+        atualizarBackground(dezena, holder.tvDezena, corDezena);
     }
 
     @Override
@@ -60,14 +70,11 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
         return dezenas.size();
     }
 
-    public void atualizarBackground(DezenaCartela dezena, TextView tvDezena){
+    public void atualizarBackground(DezenaCartela dezena, TextView tvDezena, String corDezena){
         GradientDrawable background = (GradientDrawable)tvDezena.getBackground();
 
         if(!dezena.isSelecionado()){
-            tvDezena.setTextColor(ContextCompat.getColor(
-                    context,
-                    R.color.branco
-            ));
+            tvDezena.setTextColor(Color.parseColor(corDezena));
             background.setAlpha(127);
         }else{
             background.setAlpha(255);

@@ -46,6 +46,8 @@ public class LoteriasApplication extends Application {
                 return Constants.SHARED_PREFS_JOGOS_QUINA;
             case TipoLoteria.LOTOMANIA:
                 return Constants.SHARED_PREFS_JOGOS_LOTOMANIA;
+            case TipoLoteria.TIMEMANIA:
+                return Constants.SHARED_PREFS_JOGOS_TIMEMANIA;
         }
 
         return "";

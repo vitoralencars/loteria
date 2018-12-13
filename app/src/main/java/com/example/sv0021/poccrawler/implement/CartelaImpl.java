@@ -1,16 +1,20 @@
 package com.example.sv0021.poccrawler.implement;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
+import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.presenter.CartelaPresenter;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
@@ -133,8 +137,12 @@ public class CartelaImpl implements CartelaPresenter {
             }
         }
 
+        LoteriaResponse loteria = context.getLoteria();
+        String corBackground = loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA ?
+                loteria.getCorPadrao() : loteria.getCorSecundaria();
+
         cartela.setDezenasSelecionadas(dezenasSelecionadas);
-        fragment.getAdapter().atualizarBackground(dezena, tvDezena);
+        fragment.getAdapter().atualizarBackground(dezena, tvDezena, corBackground);
         fragment.atualizarTextoDezenasSelecionadas(cartela.getDezenasSelecionadas());
     }
 
@@ -253,6 +261,35 @@ public class CartelaImpl implements CartelaPresenter {
                 }
             }
         }
+
+    }
+
+    @Override
+    public void onConfigurarBotoes(LoteriaActivity context, CartelaFragment fragment, Cartela cartela, Button btnCompletar, Button btnSalvar, Button btnLimpar) {
+        String corPadrao = context.getLoteria().getCorPadrao();
+        btnCompletar.setBackgroundColor(Color.parseColor(corPadrao));
+        btnSalvar.setBackgroundColor(Color.parseColor(corPadrao));
+        btnLimpar.setBackgroundColor(Color.parseColor(corPadrao));
+
+        String corSecundaria = context.getLoteria().getCorSecundaria();
+        btnCompletar.setTextColor(Color.parseColor(corSecundaria));
+        btnSalvar.setTextColor(Color.parseColor(corSecundaria));
+        btnLimpar.setTextColor(Color.parseColor(corSecundaria));
+
+        btnCompletar.setOnClickListener(view -> onCompletarCartela(
+                context,
+                fragment,
+                cartela
+        ));
+
+        btnSalvar.setOnClickListener(view -> onSalvarJogo(
+                context,
+                fragment,
+                cartela
+        ));
+
+        btnLimpar.setOnClickListener(view -> fragment.limparCartela());
+
 
     }
 
