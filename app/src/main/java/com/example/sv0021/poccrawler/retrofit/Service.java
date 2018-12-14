@@ -16,4 +16,7 @@ public interface Service {
     @GET("loteria/{idloteria}/{concurso}")
     Call<LoteriaResponse> getResultadoConcurso(@Path("idloteria")int idLoteria, @Path("concurso")int concurso);
 
+    @GET("timemania/timescoracao")
+    Call<List<String>> getTimes();
+
 }
