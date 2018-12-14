@@ -54,10 +54,10 @@ public class LoteriaImpl implements LoteriaPresenter {
     }
 
     @Override
-    public List<Concurso> onGetConcursosSalvos(int tipoLoteria) {
+    public List<Concurso> onGetConcursosSalvos(int codLoteria) {
 
         String key = "";
-        switch (tipoLoteria){
+        switch (codLoteria){
             case TipoLoteria.MEGA_SENA:
                 key = Constants.SHARED_PREFS_JOGOS_MEGA_SENA;
                 break;
@@ -69,6 +69,9 @@ public class LoteriaImpl implements LoteriaPresenter {
                 break;
             case TipoLoteria.LOTOMANIA:
                 key = Constants.SHARED_PREFS_JOGOS_LOTOMANIA;
+                break;
+            case TipoLoteria.TIMEMANIA:
+                key = Constants.SHARED_PREFS_JOGOS_TIMEMANIA;
                 break;
         }
 

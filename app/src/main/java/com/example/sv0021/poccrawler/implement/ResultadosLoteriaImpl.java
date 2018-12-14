@@ -54,7 +54,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 break;
             case TipoLoteria.LOTOMANIA:
                 ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_lotomania));
-
+                break;
             case TipoLoteria.TIMEMANIA:
                 ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;

@@ -21,6 +21,6 @@ public interface LoteriaPresenter {
     );
 
     List<Concurso> onGetConcursosSalvos(
-            int tipoLoteria
+            int codLoteria
     );
 }
