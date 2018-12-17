@@ -157,9 +157,15 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
         List<ResultadoLoteria> resultados = new ArrayList<>();
 
         for(int i = 0; i < loteria.getGanhadores().size(); i++){
-            if(i == loteria.getGanhadores().size() - 1
-                    && context.getLoteria().getCodigoLoteria() == TipoLoteria.LOTOMANIA){
-                qtdMaximaDezenasSorteadas = 0;
+
+            if(i == loteria.getGanhadores().size() - 1){
+                if(context.getLoteria().getCodigoLoteria() == TipoLoteria.LOTOMANIA){
+                    qtdMaximaDezenasSorteadas = 0;
+                }
+
+                if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+                    qtdMaximaDezenasSorteadas = -1;
+                }
             }
 
             int qtdGanhadores = loteria.getGanhadores().get(i);

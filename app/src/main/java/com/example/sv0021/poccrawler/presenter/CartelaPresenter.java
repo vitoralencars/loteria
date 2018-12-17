@@ -1,5 +1,6 @@
 package com.example.sv0021.poccrawler.presenter;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
@@ -34,7 +35,8 @@ public interface CartelaPresenter {
     void onLimparCartela(
             LoteriaActivity context,
             CartelaFragment fragment,
-            Cartela cartela
+            Cartela cartela,
+            EditText etTimeCoracao
     );
 
     void onDezenaClick(
@@ -48,6 +50,11 @@ public interface CartelaPresenter {
     void onExibirDezenasSelecionadas(
             TextView tvDezenasSelecionadas,
             List<DezenaCartela> dezenasSelecionados
+    );
+
+    void onSetTimeCoracaoEdicao(
+            EditText etTime,
+            String timeCoracao
     );
 
     void onInitSpinnerQtdDezenas(
@@ -78,8 +85,17 @@ public interface CartelaPresenter {
 
     void onConfigurarTimeCoracao(
             LoteriaActivity context,
+            CartelaFragment fragment,
             TextInputLayout tilTime,
             EditText etTimeCoracao
+    );
+
+    void onTimeCoracaoResult(
+            EditText etTime,
+            Cartela cartela,
+            int requestCode,
+            int resultCode,
+            Intent data
     );
 
     void onConfigurarBotoes(

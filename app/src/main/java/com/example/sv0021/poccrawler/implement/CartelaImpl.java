@@ -33,6 +33,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static android.app.Activity.RESULT_OK;
+
 public class CartelaImpl implements CartelaPresenter {
 
     @Override
@@ -91,7 +93,9 @@ public class CartelaImpl implements CartelaPresenter {
     }
 
     @Override
-    public void onLimparCartela(LoteriaActivity context, CartelaFragment fragment, Cartela cartela) {
+    public void onLimparCartela(LoteriaActivity context, CartelaFragment fragment, Cartela cartela, EditText etTimeCoracao) {
+        etTimeCoracao.setText("");
+
         int[] dezenasDisponiveis = new int[cartela.getQtdDezenasCartela()];
         for(int i = 0; i < cartela.getQtdDezenasCartela(); i++){
             cartela.getDezenasCartela().get(i).setSelecionado(false);
@@ -177,6 +181,11 @@ public class CartelaImpl implements CartelaPresenter {
     }
 
     @Override
+    public void onSetTimeCoracaoEdicao(EditText etTime, String timeCoracao) {
+        etTime.setText(timeCoracao);
+    }
+
+    @Override
     public void onInitSpinnerQtdDezenas(LoteriaActivity context, Spinner spQtdDezenas, Cartela cartela) {
         int totalValores = cartela.getQtdMaximaDezenasSelecionadas() - cartela.getQtdMinimaDezenasSelecionadas() + 1;
         String[] quantidades = new String[totalValores];
@@ -229,10 +238,18 @@ public class CartelaImpl implements CartelaPresenter {
             for (int i = 0; i < jogosSalvos.size(); i++) {
                 if (jogosSalvos.get(i).getIdJogo().equals(idJogo)) {
                     jogoEdicao = jogosSalvos.get(i);
+                    break;
                 }
             }
 
             if (jogoEdicao != null) {
+
+                if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+                    String timeCoracao = jogoEdicao.getTimeCoracao();
+                    cartela.setTimeCoracao(timeCoracao);
+                    fragment.setTimeCoracaoEdicao(timeCoracao);
+                }
+
                 List<DezenaCartela> dezenasSelecionadas = cartela.getDezenasSelecionadas();
                 for (int i = 0; i < jogoEdicao.getDezenas().size(); i++) {
                     DezenaCartela dezenaSelecionada = cartela.getDezenasCartela()
@@ -270,18 +287,28 @@ public class CartelaImpl implements CartelaPresenter {
     }
 
     @Override
-    public void onConfigurarTimeCoracao(LoteriaActivity context, TextInputLayout tilTime, EditText etTimeCoracao) {
+    public void onConfigurarTimeCoracao(LoteriaActivity context, CartelaFragment fragment, TextInputLayout tilTime, EditText etTimeCoracao) {
 
         if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
             tilTime.setVisibility(View.VISIBLE);
-            etTimeCoracao.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, TimesActivity.class);
-                    context.startActivityForResult(intent, Constants.REQUEST_CODE_TIMEMANIA);
-                }
+            etTimeCoracao.setOnClickListener(view -> {
+                Intent intent = new Intent(context, TimesActivity.class);
+                fragment.startActivityForResult(intent, Constants.REQUEST_CODE_TIMEMANIA);
             });
 
+        }
+
+    }
+
+    @Override
+    public void onTimeCoracaoResult(EditText etTime, Cartela cartela, int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == Constants.REQUEST_CODE_TIMEMANIA && resultCode == RESULT_OK &&
+                data.getExtras() != null){
+
+            String time = data.getStringExtra(Constants.EXTRA_TIME_CORACAO);
+            cartela.setTimeCoracao(time);
+            etTime.setText(time);
         }
 
     }
@@ -326,33 +353,55 @@ public class CartelaImpl implements CartelaPresenter {
                                     Integer.toString(cartela.getQtdDesejadaDezenasSelecionadas())
                             )
             );
-        }else{
-            List<Integer> dezenas = new ArrayList<>();
-            for (DezenaCartela dezena : cartela.getDezenasSelecionadas()) {
-                dezenas.add(dezena.getDezena());
-            }
 
-            List<Concurso> concursosSalvos = context.getConcursosSalvos();
-
-            int proximoConcurso = context.getUltimoConcurso() + 1;
-            if(concursosSalvos.size() > 0 &&
-                    concursosSalvos.get(0).getNumConcurso() == proximoConcurso){
-
-                concursosSalvos.get(0).getJogosSalvos().add(
-                        new JogoSalvo(System.currentTimeMillis(), dezenas));
-            }else{
-                List<JogoSalvo> jogosSalvos = new ArrayList<>();
-                jogosSalvos.add(new JogoSalvo(System.currentTimeMillis(), dezenas));
-
-                concursosSalvos.add(
-                        new Concurso(proximoConcurso, jogosSalvos, context.getLoteria().getProximoSorteio()));
-            }
-
-            context.salvarJogo(new Gson().toJson(concursosSalvos));
-
-            context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
-            fragment.limparCartela();
+            return;
         }
+
+        if(cartela.getTimeCoracao() == null || cartela.getTimeCoracao().isEmpty()){
+            context.exibirToast(
+                    context,
+                    context
+                            .getResources()
+                            .getString(R.string.erro_time_nao_selecionado)
+            );
+
+            return;
+        }
+
+        List<Integer> dezenas = new ArrayList<>();
+        for (DezenaCartela dezena : cartela.getDezenasSelecionadas()) {
+            dezenas.add(dezena.getDezena());
+        }
+
+        List<Concurso> concursosSalvos = context.getConcursosSalvos();
+
+        int proximoConcurso = context.getUltimoConcurso() + 1;
+
+        JogoSalvo jogoSalvo;
+
+        if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+            jogoSalvo = new JogoSalvo(System.currentTimeMillis(), dezenas, cartela.getTimeCoracao());
+        }else{
+            jogoSalvo = new JogoSalvo(System.currentTimeMillis(), dezenas);
+        }
+
+        if(concursosSalvos.size() > 0 &&
+                concursosSalvos.get(0).getNumConcurso() == proximoConcurso){
+
+            concursosSalvos.get(0).getJogosSalvos().add(jogoSalvo);
+        }else{
+            List<JogoSalvo> jogosSalvos = new ArrayList<>();
+            jogosSalvos.add(jogoSalvo);
+
+            concursosSalvos.add(
+                    new Concurso(proximoConcurso, jogosSalvos, context.getLoteria().getProximoSorteio()));
+        }
+
+        context.salvarJogo(new Gson().toJson(concursosSalvos));
+
+        context.exibirToast(context, context.getResources().getString(R.string.cartela_jogo_salvo));
+        fragment.limparCartela();
+
     }
 
     private void salvarEdicao(LoteriaActivity context, CartelaFragment fragment, Cartela cartela){

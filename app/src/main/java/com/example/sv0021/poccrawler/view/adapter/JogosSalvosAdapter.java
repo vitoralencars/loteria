@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
@@ -61,6 +62,11 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
                 context.getLoteria(),
                 jogo.getDezenas()
         );
+
+        if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+            holder.llTimeCoracao.setVisibility(View.VISIBLE);
+            holder.tvTimeCoracao.setText(jogo.getTimeCoracao());
+        }
 
         holder.ivEditar.setOnClickListener(view -> editarJogoSalvo(jogo));
         holder.ivRemover.setOnClickListener(view -> exibirAlertaRemoverJogo(position));
@@ -147,8 +153,8 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        LinearLayout llEdicaoRemocao;
-        TextView tvAcertos;
+        LinearLayout llEdicaoRemocao, llTimeCoracao;
+        TextView tvAcertos, tvTimeCoracao;
         ImageView ivEditar, ivRemover;
         RecyclerView rvDezenas;
 
@@ -156,7 +162,9 @@ public class JogosSalvosAdapter extends RecyclerView.Adapter<JogosSalvosAdapter.
             super(view);
 
             llEdicaoRemocao = view.findViewById(R.id.llEdicaoRemocao);
+            llTimeCoracao = view.findViewById(R.id.llTimeCoracao);
             tvAcertos = view.findViewById(R.id.tvAcertos);
+            tvTimeCoracao = view.findViewById(R.id.tvTimeCoracao);
             ivEditar = view.findViewById(R.id.ivEditar);
             ivRemover = view.findViewById(R.id.ivRemover);
             rvDezenas = view.findViewById(R.id.rvDezenas);

@@ -10,6 +10,7 @@ public class Cartela {
     private int[] dezenasDisponiveis;
     private List<DezenaCartela> dezenasCartela = new ArrayList<>();
     private List<DezenaCartela> dezenasSelecionadas = new ArrayList<>();
+    private String timeCoracao;
 
     public int getQtdDezenasCartela() {
         return qtdDezenasCartela;
@@ -65,6 +66,14 @@ public class Cartela {
 
     public void setDezenasSelecionadas(List<DezenaCartela> dezenasSelecionadas) {
         this.dezenasSelecionadas = dezenasSelecionadas;
+    }
+
+    public String getTimeCoracao() {
+        return timeCoracao;
+    }
+
+    public void setTimeCoracao(String timeCoracao) {
+        this.timeCoracao = timeCoracao;
     }
 
 }

@@ -1,10 +1,12 @@
 package com.example.sv0021.poccrawler.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.TimesImpl;
+import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
 
 import java.util.List;
@@ -40,7 +42,10 @@ public class TimesActivity extends BaseActivity implements ItemClickListener {
     public void onItemClick(int position) {
         String time = times.get(position);
 
-        setResult(RESULT_OK);
-        finish();
+        Intent intent = new Intent();
+        intent.putExtra(Constants.EXTRA_TIME_CORACAO, time);
+        setResult(RESULT_OK, intent);
+
+        TimesActivity.this.finish();
     }
 }

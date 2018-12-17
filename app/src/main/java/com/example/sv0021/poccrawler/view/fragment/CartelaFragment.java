@@ -1,6 +1,7 @@
 package com.example.sv0021.poccrawler.view.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
-import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.implement.CartelaImpl;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
@@ -155,7 +155,8 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         impl.onLimparCartela(
                 activity,
                 this,
-                cartela
+                cartela,
+                etTimeCoracao
         );
     }
 
@@ -164,6 +165,10 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
                 tvDezenasSelecionadas,
                 dezenasSelecionadas
         );
+    }
+
+    public void setTimeCoracaoEdicao(String timeCoracao){
+        impl.onSetTimeCoracaoEdicao(etTimeCoracao, timeCoracao);
     }
 
     private void configurarBotoes(){
@@ -178,7 +183,12 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     private void configurarTimeCoracao(){
-
+        impl.onConfigurarTimeCoracao(
+                activity,
+                this,
+                tilTime,
+                etTimeCoracao
+        );
     }
 
     private void verificarEdicaoJogo(){
@@ -208,6 +218,17 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
                 position,
                 tvDezena,
                 cartela
+        );
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        impl.onTimeCoracaoResult(
+                etTimeCoracao,
+                cartela,
+                requestCode,
+                resultCode,
+                data
         );
     }
 }

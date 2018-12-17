@@ -11,14 +11,38 @@
         android:paddingStart="@dimen/padding_small"
         android:paddingEnd="@dimen/padding_small">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDezenas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout style="@style/SimpleLinearLayoutVertical"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="6"/>
+            android:layout_gravity="center_vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDezenas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="6"/>
+
+            <LinearLayout style="@style/SimpleLinearLayoutHorizontal"
+                android:id="@+id/llTimeCoracao"
+                android:layout_marginTop="@dimen/margin_small"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_coracao"/>
+
+                <TextView
+                    android:id="@+id/tvTimeCoracao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="2dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llEdicaoRemocao"

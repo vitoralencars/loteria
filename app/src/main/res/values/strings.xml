@@ -30,5 +30,6 @@
     <!--ERROS-->
     <string name="erro_qtd_maxima_dezenas_selecionadas">Você já selecionou o número máximo de dezenas para esta cartela.</string>
     <string name="erro_qtd_minima_dezenas_selecionadas">Você precisa selecionar %s dezenas para salvar este jogo.</string>
+    <string name="erro_time_nao_selecionado">Você precisa indicar o time do coração para salvar este jogo da Timemania.</string>
 
 </resources>

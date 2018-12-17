@@ -42,7 +42,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder>{
         return times.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTime;
 
@@ -50,6 +50,14 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder>{
             super(v);
 
             tvTime = v.findViewById(R.id.tvTime);
+
+            v.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            context.onItemClick(getAdapterPosition());
         }
     }
 }

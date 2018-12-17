@@ -11,18 +11,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.ResultadoLoteria;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
+import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 
 import java.util.List;
 
 public class ResultadoLoteriaAdapter extends RecyclerView.Adapter<ResultadoLoteriaAdapter.ViewHolder>{
 
-    private Context context;
+    private LoteriaActivity context;
     private List<ResultadoLoteria> resultados;
     private String corPadrao;
 
-    public ResultadoLoteriaAdapter(Context context, List<ResultadoLoteria> resultados, String corPadrao) {
+    public ResultadoLoteriaAdapter(LoteriaActivity context, List<ResultadoLoteria> resultados, String corPadrao) {
         this.context = context;
         this.resultados = resultados;
         this.corPadrao = corPadrao;
@@ -42,7 +44,14 @@ public class ResultadoLoteriaAdapter extends RecyclerView.Adapter<ResultadoLoter
         ResultadoLoteria resultado = resultados.get(position);
 
         holder.tvQtdDezenas.setTextColor(Color.parseColor(corPadrao));
-        holder.tvQtdDezenas.setText(resultado.getQtdDezenas() + " Dezenas");
+
+        if(resultado.getQtdDezenas() == -1){
+            if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+                holder.tvQtdDezenas.setText("Time do Coração");
+            }
+        }else{
+            holder.tvQtdDezenas.setText(resultado.getQtdDezenas() + " Dezenas");
+        }
 
         organizarInfos(holder, resultado);
     }
