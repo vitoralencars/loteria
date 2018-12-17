@@ -4,6 +4,7 @@ package com.example.sv0021.poccrawler.view.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
+import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.implement.CartelaImpl;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
@@ -38,6 +41,8 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     private RecyclerView rvDezenas;
     private Spinner spQtdDezenas;
     private Button btnCompletar, btnSalvar, btnLimpar;
+    private TextInputLayout tilTime;
+    private EditText etTimeCoracao;
 
     private CartelaAdapter adapter;
     private LoteriaActivity activity;
@@ -59,6 +64,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         initSpinner();
         configurarBotoes();
         initEvents();
+        configurarTimeCoracao();
         verificarEdicaoJogo();
 
         return view;
@@ -77,6 +83,8 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
         btnCompletar = v.findViewById(R.id.btnCompletarCartela);
         btnSalvar = v.findViewById(R.id.btnSalvarCartela);
         btnLimpar = v.findViewById(R.id.btnLimparCartela);
+        tilTime = v.findViewById(R.id.tilTime);
+        etTimeCoracao = v.findViewById(R.id.etTimeCoracao);
     }
 
     private void initEvents(){
@@ -167,6 +175,10 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
                 btnSalvar,
                 btnLimpar
         );
+    }
+
+    private void configurarTimeCoracao(){
+
     }
 
     private void verificarEdicaoJogo(){

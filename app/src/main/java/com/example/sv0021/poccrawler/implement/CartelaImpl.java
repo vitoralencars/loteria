@@ -1,10 +1,13 @@
 package com.example.sv0021.poccrawler.implement;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,7 +19,9 @@ import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
 import com.example.sv0021.poccrawler.presenter.CartelaPresenter;
+import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
+import com.example.sv0021.poccrawler.view.activity.TimesActivity;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 import com.google.gson.Gson;
@@ -260,6 +265,23 @@ public class CartelaImpl implements CartelaPresenter {
                     }
                 }
             }
+        }
+
+    }
+
+    @Override
+    public void onConfigurarTimeCoracao(LoteriaActivity context, TextInputLayout tilTime, EditText etTimeCoracao) {
+
+        if(context.getLoteria().getCodigoLoteria() == TipoLoteria.TIMEMANIA){
+            tilTime.setVisibility(View.VISIBLE);
+            etTimeCoracao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, TimesActivity.class);
+                    context.startActivityForResult(intent, Constants.REQUEST_CODE_TIMEMANIA);
+                }
+            });
+
         }
 
     }

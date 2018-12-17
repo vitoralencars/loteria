@@ -1,7 +1,9 @@
 package com.example.sv0021.poccrawler.presenter;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -72,6 +74,12 @@ public interface CartelaPresenter {
             Spinner spQtdDezenas,
             CartelaFragment fragment,
             Cartela cartela
+    );
+
+    void onConfigurarTimeCoracao(
+            LoteriaActivity context,
+            TextInputLayout tilTime,
+            EditText etTimeCoracao
     );
 
     void onConfigurarBotoes(
