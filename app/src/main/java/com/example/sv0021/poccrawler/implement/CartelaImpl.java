@@ -17,7 +17,7 @@ import com.example.sv0021.poccrawler.model.Concurso;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.JogoSalvo;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 import com.example.sv0021.poccrawler.presenter.CartelaPresenter;
 import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
@@ -146,7 +146,7 @@ public class CartelaImpl implements CartelaPresenter {
             }
         }
 
-        LoteriaResponse loteria = context.getLoteria();
+        LoteriaComum loteria = context.getLoteria();
         String corBackground = loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA ?
                 loteria.getCorPadrao() : loteria.getCorSecundaria();
 

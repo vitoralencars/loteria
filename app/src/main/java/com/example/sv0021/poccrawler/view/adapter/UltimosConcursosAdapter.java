@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
 import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
@@ -27,10 +27,10 @@ import static com.example.sv0021.poccrawler.util.DataUtils.getDataFormatada;
 public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcursosAdapter.ViewHolder>{
 
     private UltimosConcursosActivity context;
-    private List<LoteriaResponse> loterias;
+    private List<LoteriaComum> loterias;
     private ItemClickListener itemClickListener;
 
-    public UltimosConcursosAdapter(UltimosConcursosActivity context, List<LoteriaResponse> loterias) {
+    public UltimosConcursosAdapter(UltimosConcursosActivity context, List<LoteriaComum> loterias) {
         this.context = context;
         this.loterias = loterias;
         this.itemClickListener = context;
@@ -40,7 +40,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(R.layout.item_lista_loteria, viewGroup, false);
+        View row = inflater.inflate(R.layout.item_lista_loteria_comum, viewGroup, false);
 
         return new UltimosConcursosAdapter.ViewHolder(row);
     }
@@ -48,7 +48,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LoteriaResponse loteria = loterias.get(position);
+        LoteriaComum loteria = loterias.get(position);
 
         holder.tvNomeLoteria.setText(loteria.getNomeLoteria());
         holder.tvDataConcurso.setText(getDataFormatada(loteria.getDataSorteio()));
@@ -66,7 +66,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         return loterias.size();
     }
 
-    private void setCaracteristicasLoteria(ViewHolder holder, LoteriaResponse loteria){
+    private void setCaracteristicasLoteria(ViewHolder holder, LoteriaComum loteria){
         switch (loteria.getCodigoLoteria()){
             case TipoLoteria.MEGA_SENA:
                 pintarCampos(holder, loteria.getCorPadrao());
@@ -119,7 +119,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         }
     }
 
-    private void listarDezenasSorteadas(ViewHolder holder, LoteriaResponse loteria){
+    private void listarDezenasSorteadas(ViewHolder holder, LoteriaComum loteria){
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,

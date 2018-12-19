@@ -6,18 +6,17 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.UltimosConcursosImpl;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.LoteriasResponse;
 import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
 import com.example.sv0021.poccrawler.view.adapter.UltimosConcursosAdapter;
-
-import java.util.List;
 
 public class UltimosConcursosActivity extends BaseActivity implements ItemClickListener {
 
     private UltimosConcursosImpl impl = new UltimosConcursosImpl();
     private RecyclerView rvConcursos;
-    private List<LoteriaResponse> loterias;
+    private LoteriasResponse loterias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +34,14 @@ public class UltimosConcursosActivity extends BaseActivity implements ItemClickL
         impl.onListarUltimosConcursos(UltimosConcursosActivity.this, rvConcursos);
     }
 
-    public void atualizarLoterias(List<LoteriaResponse> loterias){
+    public void atualizarLoterias(LoteriasResponse loterias){
         this.loterias = loterias;
-        rvConcursos.setAdapter(new UltimosConcursosAdapter(this, loterias));
+        rvConcursos.setAdapter(new UltimosConcursosAdapter(this, loterias.getLoteriasComuns()));
     }
 
     @Override
     public void onItemClick(int position) {
-        LoteriaResponse loteria = loterias.get(position);
+        LoteriaComum loteria = loterias.getLoteriasComuns().get(position);
 
         Intent intent = new Intent(UltimosConcursosActivity.this, LoteriaActivity.class);
         intent.putExtra(Constants.EXTRA_LOTERIA, loteria);

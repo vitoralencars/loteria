@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class LoteriaResponse implements Serializable {
+public class BaseLoteriaResponse implements Serializable {
 
     @SerializedName("CodigoLoteria")
     private int codigoLoteria;
@@ -26,16 +26,10 @@ public class LoteriaResponse implements Serializable {
     private int concurso;
     @SerializedName("DataSorteio")
     private Date dataSorteio;
-    @SerializedName("Dezenas")
-    private List<Integer> dezenas;
-    @SerializedName("Ganhadores")
-    private List<Integer> ganhadores;
     @SerializedName("Cidades")
     private List<String> cidades;
     @SerializedName("Estados")
     private List<String> estados;
-    @SerializedName("Rateio")
-    private List<Double> rateio;
     @SerializedName("ValorAcumulado")
     private double valorAcumulado;
     @SerializedName("EstimativaPremio")
@@ -79,24 +73,12 @@ public class LoteriaResponse implements Serializable {
         return dataSorteio;
     }
 
-    public List<Integer> getDezenas() {
-        return dezenas;
-    }
-
-    public List<Integer> getGanhadores() {
-        return ganhadores;
-    }
-
     public List<String> getCidades() {
         return cidades;
     }
 
     public List<String> getEstados() {
         return estados;
-    }
-
-    public List<Double> getRateio() {
-        return rateio;
     }
 
     public double getValorAcumulado() {
@@ -110,5 +92,4 @@ public class LoteriaResponse implements Serializable {
     public Date getProximoSorteio() {
         return proximoSorteio;
     }
-
 }

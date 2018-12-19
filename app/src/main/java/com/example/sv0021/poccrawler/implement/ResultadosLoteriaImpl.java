@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.ResultadoLoteria;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 import com.example.sv0021.poccrawler.presenter.ResultadosLoteriaPresenter;
 import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
 import com.example.sv0021.poccrawler.retrofit.Service;
@@ -84,18 +84,18 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     public void onConsultarConcurso(LoteriaActivity context, ResultadosLoteriaFragment fragment, int concurso) {
         ProgressBarControl.mostrarProgressBar(context);
         Service service = new RetrofitBuilder().getService();
-        service.getResultadoConcurso(context.getLoteria().getCodigoLoteria(), concurso).enqueue(new Callback<LoteriaResponse>() {
+        service.getResultadoConcurso(context.getLoteria().getCodigoLoteria(), concurso).enqueue(new Callback<LoteriaComum>() {
             @Override
-            public void onResponse(Call<LoteriaResponse> call, Response<LoteriaResponse> response) {
+            public void onResponse(Call<LoteriaComum> call, Response<LoteriaComum> response) {
                 ProgressBarControl.esconderProgressBar(context);
-                LoteriaResponse loteria = response.body();
+                LoteriaComum loteria = response.body();
                 context.setLoteria(loteria);
                 context.exibirMenuInferior();
                 fragment.exibirInfos();
             }
 
             @Override
-            public void onFailure(Call<LoteriaResponse> call, Throwable t) {
+            public void onFailure(Call<LoteriaComum> call, Throwable t) {
                 ProgressBarControl.esconderProgressBar(context);
             }
         });
@@ -151,7 +151,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
 
     @Override
     public void onExibirResultadosDetalhados(LoteriaActivity context, RecyclerView rvResultados) {
-        LoteriaResponse loteria = context.getLoteria();
+        LoteriaComum loteria = context.getLoteria();
         int qtdMaximaDezenasSorteadas = loteria.getDezenas().size();
 
         List<ResultadoLoteria> resultados = new ArrayList<>();

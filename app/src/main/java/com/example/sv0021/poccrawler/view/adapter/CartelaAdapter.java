@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
@@ -54,7 +53,7 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
         }
 
         String corDezena;
-        LoteriaResponse loteria = context.getLoteria();
+        LoteriaComum loteria = context.getLoteria();
         if(loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA){
             corDezena = loteria.getCorSecundaria();
         }else{

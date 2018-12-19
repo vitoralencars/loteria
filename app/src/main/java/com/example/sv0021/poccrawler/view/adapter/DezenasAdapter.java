@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.List;
 public class DezenasAdapter extends RecyclerView.Adapter<DezenasAdapter.ViewHolder>{
 
     private Context context;
-    private LoteriaResponse loteria;
+    private LoteriaComum loteria;
     private List<Integer> dezenas;
 
-    public  DezenasAdapter(Context context, LoteriaResponse loteria, List<Integer> dezenas) {
+    public  DezenasAdapter(Context context, LoteriaComum loteria, List<Integer> dezenas) {
         this.context = context;
         this.loteria = loteria;
         this.dezenas = dezenas;

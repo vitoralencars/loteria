@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.sv0021.poccrawler.model.dto.LoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
 import com.example.sv0021.poccrawler.presenter.JogosSalvosPresenter;
 import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
 import com.example.sv0021.poccrawler.retrofit.Service;
@@ -35,15 +35,15 @@ public class JogosSalvosImpl implements JogosSalvosPresenter {
     public void onConferirResultados(LoteriaActivity context, int codConcurso, int index, ConcursosAdapter adapter, ProgressBar progressBar) {
         Service service = new RetrofitBuilder().getService();
         service.getResultadoConcurso(context.getLoteria().getCodigoLoteria(),
-                codConcurso).enqueue(new Callback<LoteriaResponse>() {
+                codConcurso).enqueue(new Callback<LoteriaComum>() {
             @Override
-            public void onResponse(Call<LoteriaResponse> call, Response<LoteriaResponse> response) {
+            public void onResponse(Call<LoteriaComum> call, Response<LoteriaComum> response) {
                 progressBar.setVisibility(View.GONE);
                 adapter.setResultado(response.body(), index);
             }
 
             @Override
-            public void onFailure(Call<LoteriaResponse> call, Throwable t) {
+            public void onFailure(Call<LoteriaComum> call, Throwable t) {
 
             }
         });
