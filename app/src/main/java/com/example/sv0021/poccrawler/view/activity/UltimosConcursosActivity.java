@@ -39,6 +39,10 @@ public class UltimosConcursosActivity extends BaseActivity implements ItemClickL
         rvConcursos.setAdapter(new UltimosConcursosAdapter(this, loterias.getLoteriasComuns()));
     }
 
+    private void exibirDuplaSena(){
+
+    }
+
     @Override
     public void onItemClick(int position) {
         LoteriaComum loteria = loterias.getLoteriasComuns().get(position);
