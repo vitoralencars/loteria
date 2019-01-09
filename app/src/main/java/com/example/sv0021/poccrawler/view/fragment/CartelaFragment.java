@@ -22,6 +22,7 @@ import com.example.sv0021.poccrawler.implement.CartelaImpl;
 import com.example.sv0021.poccrawler.model.Cartela;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaResponse;
 import com.example.sv0021.poccrawler.util.recyclerview.DezenaClickListener;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.CartelaAdapter;
@@ -125,7 +126,7 @@ public class CartelaFragment extends Fragment implements DezenaClickListener {
     }
 
     private void initCartela(){
-        BaseLoteriaComum loteria = activity.getLoteria();
+        BaseLoteriaResponse loteria = activity.getLoteria();
 
         cartela = new Cartela();
         cartela.setQtdDesejadaDezenasSelecionadas(loteria.getQtdMinimaDezenasAposta());

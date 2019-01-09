@@ -15,23 +15,16 @@ import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.ResultadoLoteria;
 import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.presenter.ResultadosLoteriaPresenter;
-import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
-import com.example.sv0021.poccrawler.retrofit.Service;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
-import com.example.sv0021.poccrawler.util.ProgressBarControl;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.adapter.CidadesAdapter;
 import com.example.sv0021.poccrawler.view.adapter.DezenasAdapter;
 import com.example.sv0021.poccrawler.view.adapter.ResultadoLoteriaAdapter;
-import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
+import com.example.sv0021.poccrawler.view.fragment.BaseResultadosLoteriaFragment;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.example.sv0021.poccrawler.util.DataUtils.getDataFormatada;
 
@@ -43,7 +36,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
         tvNomeLoteria.setText(context.getLoteria().getNomeLoteria());
 
         switch (context.getLoteria().getCodigoLoteria()){
-            case TipoLoteria.MEGA_SENA:
+            case TipoLoteria.MEGASENA:
                 ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
             case TipoLoteria.LOTOFACIL:
@@ -81,7 +74,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     }
 
     @Override
-    public void onConsultarConcurso(LoteriaActivity context, ResultadosLoteriaFragment fragment, int concurso) {
+    public void onConsultarConcurso(LoteriaActivity context, BaseResultadosLoteriaFragment fragment, int concurso) {
         /*ProgressBarControl.mostrarProgressBar(context);
         Service service = new RetrofitBuilder().getService();
         service.getResultadoConcurso(context.getLoteria().getCodigoLoteria(), concurso).enqueue(new Callback<BaseLoteriaComum>() {
@@ -104,7 +97,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     @Override
     public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvDataSorteio, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvCidades, RecyclerView rvDezenas) {
 
-        tvDataSorteio.setText(getDataFormatada(context.getLoteria().getDataSorteio()));
+        /*tvDataSorteio.setText(getDataFormatada(context.getLoteria().getDataSorteio()));
         tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(context.getLoteria().getEstimativaPremio()));
 
         int numGanhadores = context.getLoteria().getGanhadores().get(0);
@@ -146,12 +139,12 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 ? new GridLayoutManager(context, 6)
                 : new GridLayoutManager(context, context.getLoteria().getDezenas().size()));
 
-        rvDezenas.setAdapter(adapter);
+        rvDezenas.setAdapter(adapter);*/
     }
 
     @Override
     public void onExibirResultadosDetalhados(LoteriaActivity context, RecyclerView rvResultados) {
-        BaseLoteriaComum loteria = context.getLoteria();
+        /*BaseLoteriaComum loteria = context.getLoteria();
         int qtdMaximaDezenasSorteadas = loteria.getDezenas().size();
 
         List<ResultadoLoteria> resultados = new ArrayList<>();
@@ -189,7 +182,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 loteria.getCorPadrao()
         );
 
-        rvResultados.setAdapter(adapter);
+        rvResultados.setAdapter(adapter);*/
     }
 
     @Override

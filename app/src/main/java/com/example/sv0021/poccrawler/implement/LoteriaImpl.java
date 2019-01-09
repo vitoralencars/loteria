@@ -3,19 +3,18 @@ package com.example.sv0021.poccrawler.implement;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.FrameLayout;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.Concurso;
-import com.example.sv0021.poccrawler.model.JogoSalvo;
 import com.example.sv0021.poccrawler.presenter.LoteriaPresenter;
 import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 import com.example.sv0021.poccrawler.view.fragment.JogosSalvosFragment;
-import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
+import com.example.sv0021.poccrawler.view.fragment.BaseResultadosLoteriaFragment;
+import com.example.sv0021.poccrawler.view.fragment.ResultadosMegasenaFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,7 +28,7 @@ public class LoteriaImpl implements LoteriaPresenter {
 
     @Override
     public void onSetPrimeiroFragment(LoteriaActivity context) {
-        atualizarFrameLayout(context, new ResultadosLoteriaFragment());
+        setFragmentResultados(context);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class LoteriaImpl implements LoteriaPresenter {
             switch (menuItem.getItemId()){
                 case R.id.menu_concurso:
                     bnvMenu.getMenu().getItem(0).setChecked(true);
-                    atualizarFrameLayout(context, new ResultadosLoteriaFragment());
+                    setFragmentResultados(context);
                     break;
                 case R.id.menu_cartela:
                     bnvMenu.getMenu().getItem(1).setChecked(true);
@@ -58,8 +57,8 @@ public class LoteriaImpl implements LoteriaPresenter {
 
         String key = "";
         switch (codLoteria){
-            case TipoLoteria.MEGA_SENA:
-                key = Constants.SHARED_PREFS_JOGOS_MEGA_SENA;
+            case TipoLoteria.MEGASENA:
+                key = Constants.SHARED_PREFS_JOGOS_MEGASENA;
                 break;
             case TipoLoteria.LOTOFACIL:
                 key = Constants.SHARED_PREFS_JOGOS_LOTOFACIL;
@@ -73,6 +72,9 @@ public class LoteriaImpl implements LoteriaPresenter {
             case TipoLoteria.TIMEMANIA:
                 key = Constants.SHARED_PREFS_JOGOS_TIMEMANIA;
                 break;
+            case TipoLoteria.DUPLASENA:
+                key = Constants.SHARED_PREFS_JOGOS_DUPLASENA;
+                break;
         }
 
         String json = LoteriasApplication.getPreferences(key);
@@ -84,6 +86,24 @@ public class LoteriaImpl implements LoteriaPresenter {
             Collections.sort(concursos, (o1, o2) -> o2.getNumConcurso() - o1.getNumConcurso());
 
             return concursos;
+        }
+    }
+
+    private void setFragmentResultados(LoteriaActivity context){
+        switch (context.getLoteria().getCodigoLoteria()){
+            case TipoLoteria.MEGASENA:
+                atualizarFrameLayout(context, new ResultadosMegasenaFragment());
+                break;
+            case TipoLoteria.LOTOFACIL:
+                break;
+            case TipoLoteria.QUINA:
+                break;
+            case TipoLoteria.LOTOMANIA:
+                break;
+            case TipoLoteria.TIMEMANIA:
+                break;
+            case TipoLoteria.DUPLASENA:
+                break;
         }
     }
 

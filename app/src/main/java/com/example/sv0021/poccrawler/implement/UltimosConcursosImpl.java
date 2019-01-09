@@ -1,6 +1,7 @@
 package com.example.sv0021.poccrawler.implement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,9 +22,11 @@ import com.example.sv0021.poccrawler.model.dto.Timemania;
 import com.example.sv0021.poccrawler.presenter.UltimosConcursosPresenter;
 import com.example.sv0021.poccrawler.retrofit.RetrofitBuilder;
 import com.example.sv0021.poccrawler.retrofit.Service;
+import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.util.DataUtils;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.ProgressBarControl;
+import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
 import com.example.sv0021.poccrawler.view.adapter.DezenasAdapter;
 
@@ -75,6 +78,17 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
         TextView tvDataProximoSorteio = context.findViewById(R.id.tvDataProximoSorteioMegasena);
 
         card.setVisibility(View.VISIBLE);
+        //card.setOnClickListener(view -> loteriaClickListener(context, megasena));
+        card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, LoteriaActivity.class);
+                intent.putExtra(Constants.EXTRA_LOTERIA, megasena);
+
+                context.loadActivity(intent);
+            }
+        });
+
         tvNomeLoteria.setText(megasena.getNomeLoteria());
         tvDataConcurso.setText(DataUtils.getDataFormatada(megasena.getDataSorteio()));
         tvConcurso.setText(Integer.toString(megasena.getConcurso()));
@@ -307,6 +321,15 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
         }else{
             view.setBackgroundColor(Color.parseColor(cor));
         }
+    }
+
+    private View.OnClickListener loteriaClickListener(UltimosConcursosActivity context, BaseLoteriaResponse loteria){
+        return view -> {
+            Intent intent = new Intent(context, LoteriaActivity.class);
+            intent.putExtra(Constants.EXTRA_LOTERIA, loteria);
+
+            context.loadActivity(intent);
+        };
     }
 
 }

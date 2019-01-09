@@ -32,4 +32,7 @@
     <string name="erro_qtd_minima_dezenas_selecionadas">Você precisa selecionar %s dezenas para salvar este jogo.</string>
     <string name="erro_time_nao_selecionado">Você precisa indicar o time do coração para salvar este jogo da Timemania.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
-import com.example.sv0021.poccrawler.view.fragment.ResultadosLoteriaFragment;
+import com.example.sv0021.poccrawler.view.fragment.BaseResultadosLoteriaFragment;
 
 import java.util.Date;
 
@@ -41,7 +41,7 @@ public interface ResultadosLoteriaPresenter {
 
     void onConsultarConcurso(
             LoteriaActivity context,
-            ResultadosLoteriaFragment fragment,
+            BaseResultadosLoteriaFragment fragment,
             int concurso
     );
 

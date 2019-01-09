@@ -70,7 +70,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
 
     private void setCaracteristicasLoteria(ViewHolder holder, BaseLoteriaResponse loteria){
         switch (loteria.getCodigoLoteria()){
-            case TipoLoteria.MEGA_SENA:
+            case TipoLoteria.MEGASENA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
@@ -90,7 +90,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
                 break;
-            case TipoLoteria.DUPLA_SENA:
+            case TipoLoteria.DUPLASENA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_duplasena));
                 break;

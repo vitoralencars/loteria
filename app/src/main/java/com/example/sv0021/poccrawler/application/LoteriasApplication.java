@@ -38,8 +38,8 @@ public class LoteriasApplication extends Application {
 
     public static String getPreferenceKey(int codigoLoteria){
         switch (codigoLoteria){
-            case TipoLoteria.MEGA_SENA:
-                return Constants.SHARED_PREFS_JOGOS_MEGA_SENA;
+            case TipoLoteria.MEGASENA:
+                return Constants.SHARED_PREFS_JOGOS_MEGASENA;
             case TipoLoteria.LOTOFACIL:
                 return Constants.SHARED_PREFS_JOGOS_LOTOFACIL;
             case TipoLoteria.QUINA:

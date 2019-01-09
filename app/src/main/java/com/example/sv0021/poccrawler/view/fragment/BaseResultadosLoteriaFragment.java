@@ -18,7 +18,7 @@ import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResultadosLoteriaFragment extends Fragment {
+public class BaseResultadosLoteriaFragment extends Fragment {
 
     private LoteriaActivity activity;
 
@@ -33,25 +33,12 @@ public class ResultadosLoteriaFragment extends Fragment {
 
     private int concursoAtual;
 
-    public ResultadosLoteriaFragment() {
+    public BaseResultadosLoteriaFragment() {
         // Required empty public constructor
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_resultados_loteria, container, false);
-        activity = (LoteriaActivity)getActivity();
-        concursoAtual = activity.getLoteria().getConcurso();
-
-        initView(view);
-        initEvents();
-
-        return view;
-    }
-
-    private void initView(View v){
+    public void initBaseView(View v){
         llResultadosGerais = v.findViewById(R.id.llResultadosGerais);
         llResultadosDetalhados = v.findViewById(R.id.llResultadosDetalhados);
         llValorEstimado = v.findViewById(R.id.llValorEstimado);
@@ -70,7 +57,7 @@ public class ResultadosLoteriaFragment extends Fragment {
         rvCidades = v.findViewById(R.id.rvCidades);
     }
 
-    private void initEvents(){
+    public void initBaseEvents(){
         ivProximo.setOnClickListener(view -> {
             concursoAtual++;
             consultarConcurso();
@@ -105,6 +92,15 @@ public class ResultadosLoteriaFragment extends Fragment {
         consultarConcurso();
     }
 
+    public void setActivity(LoteriaActivity activity){
+        this.activity = activity;
+        setConcursoAtual();
+    }
+
+    private  void setConcursoAtual(){
+        this.concursoAtual = activity.getLoteria().getConcurso();
+    }
+
     private void consultarConcurso(){
         tvConcurso.setText("Concurso " + concursoAtual);
 
@@ -120,12 +116,12 @@ public class ResultadosLoteriaFragment extends Fragment {
 
         impl.onConsultarConcurso(
                 activity,
-                ResultadosLoteriaFragment.this,
+                BaseResultadosLoteriaFragment.this,
                 concursoAtual
         );
     }
 
-    public void exibirInfos(){
+    /*public void exibirInfos(){
         llResultadosGerais.setVisibility(View.VISIBLE);
         llResultadosDetalhados.setVisibility(View.VISIBLE);
 
@@ -142,6 +138,6 @@ public class ResultadosLoteriaFragment extends Fragment {
                 activity,
                 rvResultados
         );
-    }
+    }*/
 
 }

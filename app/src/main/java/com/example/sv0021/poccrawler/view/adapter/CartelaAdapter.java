@@ -14,6 +14,7 @@ import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
 import com.example.sv0021.poccrawler.model.DezenaCartela;
 import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaResponse;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.example.sv0021.poccrawler.view.fragment.CartelaFragment;
 
@@ -53,7 +54,7 @@ public class CartelaAdapter extends RecyclerView.Adapter<CartelaAdapter.ViewHold
         }
 
         String corDezena;
-        BaseLoteriaComum loteria = context.getLoteria();
+        BaseLoteriaResponse loteria = context.getLoteria();
         if(loteria.getCodigoLoteria() != TipoLoteria.TIMEMANIA){
             corDezena = loteria.getCorSecundaria();
         }else{
