@@ -15,7 +15,8 @@ import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.enumeradores.TipoLoteria;
-import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaResponse;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.util.MoedaUtils;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
 import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
@@ -27,10 +28,10 @@ import static com.example.sv0021.poccrawler.util.DataUtils.getDataFormatada;
 public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcursosAdapter.ViewHolder>{
 
     private UltimosConcursosActivity context;
-    private List<LoteriaComum> loterias;
+    private List<BaseLoteriaComum> loterias;
     private ItemClickListener itemClickListener;
 
-    public UltimosConcursosAdapter(UltimosConcursosActivity context, List<LoteriaComum> loterias) {
+    public UltimosConcursosAdapter(UltimosConcursosActivity context, List<BaseLoteriaComum> loterias) {
         this.context = context;
         this.loterias = loterias;
         this.itemClickListener = context;
@@ -48,7 +49,8 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LoteriaComum loteria = loterias.get(position);
+        BaseLoteriaComum loteria = loterias.get(position);
+
 
         holder.tvNomeLoteria.setText(loteria.getNomeLoteria());
         holder.tvDataConcurso.setText(getDataFormatada(loteria.getDataSorteio()));
@@ -66,7 +68,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         return loterias.size();
     }
 
-    private void setCaracteristicasLoteria(ViewHolder holder, LoteriaComum loteria){
+    private void setCaracteristicasLoteria(ViewHolder holder, BaseLoteriaResponse loteria){
         switch (loteria.getCodigoLoteria()){
             case TipoLoteria.MEGA_SENA:
                 pintarCampos(holder, loteria.getCorPadrao());
@@ -87,6 +89,10 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
             case TipoLoteria.TIMEMANIA:
                 pintarCampos(holder, loteria.getCorPadrao());
                 holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_megasena));
+                break;
+            case TipoLoteria.DUPLA_SENA:
+                pintarCampos(holder, loteria.getCorPadrao());
+                holder.ivIconeLoteria.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_duplasena));
                 break;
         }
     }
@@ -119,7 +125,7 @@ public class UltimosConcursosAdapter extends RecyclerView.Adapter<UltimosConcurs
         }
     }
 
-    private void listarDezenasSorteadas(ViewHolder holder, LoteriaComum loteria){
+    private void listarDezenasSorteadas(ViewHolder holder, BaseLoteriaComum loteria){
 
         DezenasAdapter adapter = new DezenasAdapter(
                 context,

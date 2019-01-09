@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class DuplaSena extends BaseLoteriaResponse implements Serializable {
+public class Duplasena extends BaseLoteriaResponse implements Serializable {
 
     @SerializedName("DezenasPrimeiroSorteio")
     private List<Integer> dezenasPrimeiroSorteio;

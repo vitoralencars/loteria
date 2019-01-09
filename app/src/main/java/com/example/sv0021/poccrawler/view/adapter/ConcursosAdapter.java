@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.JogosSalvosImpl;
 import com.example.sv0021.poccrawler.model.Concurso;
-import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.util.DataUtils;
 import com.example.sv0021.poccrawler.view.activity.LoteriaActivity;
 import com.google.gson.Gson;
@@ -108,7 +108,7 @@ public class ConcursosAdapter extends RecyclerView.Adapter<ConcursosAdapter.View
                 holder.progressConferir);
     }
 
-    public void setResultado(LoteriaComum response, int posConcurso){
+    public void setResultado(BaseLoteriaComum response, int posConcurso){
         int[] resultadoLoteria = new int[response.getDezenas().size()];
 
         for(int i = 0; i < resultadoLoteria.length; i++){

@@ -1,6 +1,6 @@
 package com.example.sv0021.poccrawler.retrofit;
 
-import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaResponse;
 import com.example.sv0021.poccrawler.model.dto.LoteriasResponse;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface Service {
     Call<LoteriasResponse> getUltimosResultados();
 
     @GET("loteria/{idloteria}/{concurso}")
-    Call<LoteriaComum> getResultadoConcurso(@Path("idloteria")int idLoteria, @Path("concurso")int concurso);
+    Call<BaseLoteriaResponse> getResultadoConcurso(@Path("idloteria")int idLoteria, @Path("concurso")int concurso);
 
     @GET("timemania/timescoracao")
     Call<List<String>> getTimes();

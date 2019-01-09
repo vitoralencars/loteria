@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.implement.UltimosConcursosImpl;
-import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.model.dto.LoteriasResponse;
 import com.example.sv0021.poccrawler.util.Constants;
 import com.example.sv0021.poccrawler.util.recyclerview.ItemClickListener;
@@ -27,29 +27,24 @@ public class UltimosConcursosActivity extends BaseActivity implements ItemClickL
     }
 
     private void initView(){
-        rvConcursos = findViewById(R.id.rvConcursos);
+        //rvConcursos = findViewById(R.id.rvConcursos);
     }
 
     private void initEvents(){
-        impl.onListarUltimosConcursos(UltimosConcursosActivity.this, rvConcursos);
+        impl.onListarUltimosConcursos(UltimosConcursosActivity.this);
     }
 
     public void atualizarLoterias(LoteriasResponse loterias){
         this.loterias = loterias;
-        rvConcursos.setAdapter(new UltimosConcursosAdapter(this, loterias.getLoteriasComuns()));
-    }
-
-    private void exibirDuplaSena(){
-
     }
 
     @Override
     public void onItemClick(int position) {
-        LoteriaComum loteria = loterias.getLoteriasComuns().get(position);
+        /*BaseLoteriaComum loteria = (BaseLoteriaComum)loterias.getLoteriasComuns().get(position);
 
         Intent intent = new Intent(UltimosConcursosActivity.this, LoteriaActivity.class);
         intent.putExtra(Constants.EXTRA_LOTERIA, loteria);
 
-        loadActivity(intent);
+        loadActivity(intent);*/
     }
 }

@@ -7,5 +7,6 @@ public class TipoLoteria {
     public static final int QUINA = 3;
     public static final int LOTOMANIA = 4;
     public static final int TIMEMANIA = 5;
+    public static final int DUPLA_SENA = 6;
 
 }

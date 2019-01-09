@@ -92,4 +92,5 @@ public class BaseLoteriaResponse implements Serializable {
     public Date getProximoSorteio() {
         return proximoSorteio;
     }
+
 }

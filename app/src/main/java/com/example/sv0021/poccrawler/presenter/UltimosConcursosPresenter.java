@@ -7,8 +7,7 @@ import com.example.sv0021.poccrawler.view.activity.UltimosConcursosActivity;
 public interface UltimosConcursosPresenter {
 
     void onListarUltimosConcursos(
-            UltimosConcursosActivity context,
-            RecyclerView rvConcursos
+            UltimosConcursosActivity context
     );
 
 }

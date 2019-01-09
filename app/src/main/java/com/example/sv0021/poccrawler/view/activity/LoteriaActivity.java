@@ -10,7 +10,7 @@ import com.example.sv0021.poccrawler.R;
 import com.example.sv0021.poccrawler.application.LoteriasApplication;
 import com.example.sv0021.poccrawler.implement.LoteriaImpl;
 import com.example.sv0021.poccrawler.model.Concurso;
-import com.example.sv0021.poccrawler.model.dto.LoteriaComum;
+import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.util.Constants;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class LoteriaActivity extends BaseActivity {
 
     private LoteriaImpl impl = new LoteriaImpl();
 
-    private LoteriaComum loteria;
+    private BaseLoteriaComum loteria;
 
     private BottomNavigationView bnvMenu;
 
@@ -41,7 +41,7 @@ public class LoteriaActivity extends BaseActivity {
 
     private void recuperarIntent(Intent intent){
         if(intent != null){
-            loteria = (LoteriaComum)intent.getExtras().getSerializable(Constants.EXTRA_LOTERIA);
+            loteria = (BaseLoteriaComum)intent.getExtras().getSerializable(Constants.EXTRA_LOTERIA);
             ultimoConcurso = loteria.getConcurso();
         }
     }
@@ -51,11 +51,11 @@ public class LoteriaActivity extends BaseActivity {
         impl.onSetPrimeiroFragment(this);
     }
 
-    public LoteriaComum getLoteria() {
+    public BaseLoteriaComum getLoteria() {
         return loteria;
     }
 
-    public void setLoteria(LoteriaComum loteria){
+    public void setLoteria(BaseLoteriaComum loteria){
         this.loteria = loteria;
     }
 
