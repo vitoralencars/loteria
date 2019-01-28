@@ -29,6 +29,7 @@ public class ResultadosMegasenaFragment extends BaseResultadosLoteriaFragment {
         setActivity((LoteriaActivity)getActivity());
         initBaseView(view);
         initBaseEvents();
+        exibirInfos();
 
         return view;
     }

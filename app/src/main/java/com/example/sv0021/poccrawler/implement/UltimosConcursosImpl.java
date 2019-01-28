@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.sv0021.poccrawler.R;
-import com.example.sv0021.poccrawler.model.dto.BaseLoteriaComum;
 import com.example.sv0021.poccrawler.model.dto.BaseLoteriaResponse;
 import com.example.sv0021.poccrawler.model.dto.Duplasena;
 import com.example.sv0021.poccrawler.model.dto.LoteriasResponse;
@@ -78,16 +77,7 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
         TextView tvDataProximoSorteio = context.findViewById(R.id.tvDataProximoSorteioMegasena);
 
         card.setVisibility(View.VISIBLE);
-        //card.setOnClickListener(view -> loteriaClickListener(context, megasena));
-        card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, LoteriaActivity.class);
-                intent.putExtra(Constants.EXTRA_LOTERIA, megasena);
-
-                context.loadActivity(intent);
-            }
-        });
+        card.setOnClickListener(view -> acessarInfosLoteria(context, megasena));
 
         tvNomeLoteria.setText(megasena.getNomeLoteria());
         tvDataConcurso.setText(DataUtils.getDataFormatada(megasena.getDataSorteio()));
@@ -323,13 +313,11 @@ public class UltimosConcursosImpl implements UltimosConcursosPresenter {
         }
     }
 
-    private View.OnClickListener loteriaClickListener(UltimosConcursosActivity context, BaseLoteriaResponse loteria){
-        return view -> {
-            Intent intent = new Intent(context, LoteriaActivity.class);
-            intent.putExtra(Constants.EXTRA_LOTERIA, loteria);
+    private void acessarInfosLoteria(UltimosConcursosActivity context, BaseLoteriaResponse loteria){
+        Intent intent = new Intent(context, LoteriaActivity.class);
+        intent.putExtra(Constants.EXTRA_LOTERIA, loteria);
 
-            context.loadActivity(intent);
-        };
+        context.loadActivity(intent);
     }
 
 }

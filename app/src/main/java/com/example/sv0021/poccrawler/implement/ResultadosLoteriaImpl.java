@@ -97,10 +97,12 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
     @Override
     public void onExibirResultadoPrincipal(LoteriaActivity context, TextView tvDataSorteio, TextView tvGanhadores, TextView tvValorEstimado, RecyclerView rvCidades, RecyclerView rvDezenas) {
 
-        /*tvDataSorteio.setText(getDataFormatada(context.getLoteria().getDataSorteio()));
-        tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(context.getLoteria().getEstimativaPremio()));
+        BaseLoteriaComum loteria = (BaseLoteriaComum)context.getLoteria();
 
-        int numGanhadores = context.getLoteria().getGanhadores().get(0);
+        tvDataSorteio.setText(getDataFormatada(loteria.getDataSorteio()));
+        tvValorEstimado.setText(MoedaUtils.getValorMoedaReal(loteria.getEstimativaPremio()));
+
+        int numGanhadores = loteria.getGanhadores().get(0);
         switch (numGanhadores){
             case 0:
                 tvGanhadores.setText(context
@@ -132,19 +134,19 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
         DezenasAdapter adapter = new DezenasAdapter(
                 context,
                 context.getLoteria(),
-                context.getLoteria().getDezenas()
+                loteria.getDezenas()
         );
 
-        rvDezenas.setLayoutManager(context.getLoteria().getDezenas().size() > 5
+        rvDezenas.setLayoutManager(loteria.getDezenas().size() > 5
                 ? new GridLayoutManager(context, 6)
-                : new GridLayoutManager(context, context.getLoteria().getDezenas().size()));
+                : new GridLayoutManager(context, loteria.getDezenas().size()));
 
-        rvDezenas.setAdapter(adapter);*/
+        rvDezenas.setAdapter(adapter);
     }
 
     @Override
     public void onExibirResultadosDetalhados(LoteriaActivity context, RecyclerView rvResultados) {
-        /*BaseLoteriaComum loteria = context.getLoteria();
+        BaseLoteriaComum loteria = (BaseLoteriaComum)context.getLoteria();
         int qtdMaximaDezenasSorteadas = loteria.getDezenas().size();
 
         List<ResultadoLoteria> resultados = new ArrayList<>();
@@ -182,7 +184,7 @@ public class ResultadosLoteriaImpl implements ResultadosLoteriaPresenter {
                 loteria.getCorPadrao()
         );
 
-        rvResultados.setAdapter(adapter);*/
+        rvResultados.setAdapter(adapter);
     }
 
     @Override

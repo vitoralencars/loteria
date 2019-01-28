@@ -121,7 +121,7 @@ public class BaseResultadosLoteriaFragment extends Fragment {
         );
     }
 
-    /*public void exibirInfos(){
+    public void exibirInfos(){
         llResultadosGerais.setVisibility(View.VISIBLE);
         llResultadosDetalhados.setVisibility(View.VISIBLE);
 
@@ -138,6 +138,6 @@ public class BaseResultadosLoteriaFragment extends Fragment {
                 activity,
                 rvResultados
         );
-    }*/
+    }
 
 }
